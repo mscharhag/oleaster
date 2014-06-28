@@ -14,6 +14,7 @@ import org.junit.runners.model.InitializationError;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Function;
 
 public class JMineRunner extends ParentRunner<Spec> {
 
@@ -24,85 +25,86 @@ public class JMineRunner extends ParentRunner<Spec> {
 
 	@Override
 	protected List<Spec> getChildren() {
-		List<Spec> allSpecs = new ArrayList<>();
-		try {
-			SuiteBuilder suiteBuilder = new StaticSupportingSuiteBuilder();
+		SuiteBuilder suiteBuilder = this.createSuiteBuilder();
+		SuiteDefinition baseSuiteDefinition = this.createBaseSuiteDefinition(suiteBuilder);
+		SuiteDefinitionEvaluator evaluator = this.createSuiteDefinitionEvaluator();
 
-			SuiteDefinition def = new SuiteDefinition(null, "base", () -> {
-				try {
-					Object obj = getTestClass().getJavaClass().newInstance();
-					if (obj instanceof JMineTest) {
-						((JMineTest) obj).buildTestSuite(suiteBuilder);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			});
+		Suite suite = evaluator.evaluate(baseSuiteDefinition, suiteBuilder);
 
-			SuiteDefinitionEvaluator evaluator = new SuiteDefinitionEvaluator();
-			Suite suite = evaluator.evaluate(def, suiteBuilder);
-
-			allSpecs.addAll(suite.collectSpecs());
-
-			System.out.println("found " + allSpecs.size() + " specs");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return allSpecs;
+		return suite.collectSpecs();
 	}
 
-	private void runBeforeEachCallbacks(Spec spec) {
-		List<Invokable> callbacks = new ArrayList<>();
-		Suite parent = spec.getSuite();
-		while (parent != null) {
-			callbacks.addAll(parent.getBeforeEachHandlers());
-			parent = parent.getParent();
-		}
-		Collections.reverse(callbacks);
-		callbacks.forEach(callback -> {
-			try {
-				callback.invoke();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
-	private void runAfterEachCallbacks(Spec spec) {
-		// TODO cleanup duplication
-		List<Invokable> callbacks = new ArrayList<>();
-		Suite parent = spec.getSuite();
-		while (parent != null) {
-			callbacks.addAll(parent.getAfterEachHandlers());
-			parent = parent.getParent();
-		}
-//		Collections.reverse(callbacks);
-		callbacks.forEach(callback -> {
-			try {
-				callback.invoke();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
 
 	@Override
 	protected void runChild(Spec spec, RunNotifier notifier) {
-		Description description = describeChild(spec);
 		runBeforeEachCallbacks(spec);
-		runLeaf(spec, description, notifier);
+		runLeaf(spec, describeChild(spec), notifier);
 		runAfterEachCallbacks(spec);
-//		System.out.println("runChild finished: " + spec.getDescription());
 	}
+
 
 	@Override
 	protected Description describeChild(Spec child) {
-//		System.out.println("description: " + child.getDescription());
-		return Description.createTestDescription(this.getTestClass().getJavaClass(), child.getDescription());
+		return Description.createTestDescription(this.getTestClass().getJavaClass(), child.getFullDescription());
 	}
+
 
 	@Override
 	public Description getDescription() {
 		return Description.createSuiteDescription(this.getTestClass().getJavaClass().getName());
+	}
+
+
+	protected SuiteBuilder createSuiteBuilder() {
+		return new StaticSupportingSuiteBuilder();
+	}
+
+
+	protected SuiteDefinition createBaseSuiteDefinition(SuiteBuilder suiteBuilder) {
+		return new SuiteDefinition(null, null, () -> {
+			Object obj = getTestClass().getJavaClass().newInstance();
+			if (obj instanceof JMineTest) {
+				((JMineTest) obj).buildTestSuite(suiteBuilder);
+			}
+		});
+	}
+
+
+	protected SuiteDefinitionEvaluator createSuiteDefinitionEvaluator() {
+		return new SuiteDefinitionEvaluator();
+	}
+
+
+	private void runBeforeEachCallbacks(Spec spec) {
+		List<Invokable> beforeEachHandlers = this.collectInvokables(spec.getSuite(), Suite::getBeforeEachHandlers);
+		Collections.reverse(beforeEachHandlers);
+		this.runInvokables(beforeEachHandlers);
+	}
+
+
+	private void runAfterEachCallbacks(Spec spec) {
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterEachHandlers));
+	}
+
+
+	private List<Invokable> collectInvokables(Suite suite, Function<Suite, List<Invokable>> method) {
+		List<Invokable> invokables = new ArrayList<>();
+		Suite parent = suite;
+		while (parent != null) {
+			invokables.addAll(method.apply(parent));
+			parent = parent.getParent();
+		}
+		return invokables;
+	}
+
+
+	private void runInvokables(List<Invokable> invokables) {
+		invokables.forEach(callback -> {
+			try {
+				callback.invoke();
+			} catch (Exception e) {
+				throw new RuntimeException("An exception occurred while running invokable: " + e.getMessage(), e);
+			}
+		});
 	}
 }

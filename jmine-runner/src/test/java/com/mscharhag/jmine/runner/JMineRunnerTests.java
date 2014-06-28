@@ -4,6 +4,8 @@ import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.*;
 
 import com.mscharhag.jmine.runner.suite.Spec;
 import com.mscharhag.jmine.runner.suite.Suite;
+import com.mscharhag.jmine.runner.suite.SuiteBuilder;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runner.notification.RunNotifier;
 
@@ -21,10 +23,10 @@ public class JMineRunnerTests {
 
 	private JMineRunner runner;
 	private Suite suite;
+	private List<Spec> specs;
 
 	public static class TestClass {{
 		describe("outer describe", () -> {
-			beforeEach(block.apply("outer before each"));
 			describe("inner describe", () -> {
 				it("inner it", block.apply("inner it"));
 			});
@@ -32,57 +34,81 @@ public class JMineRunnerTests {
 		});
 	}}
 
+
+	public static class JMineTestImplementingTestClass implements JMineTest {
+
+		public static SuiteBuilder suiteBuilder;
+
+		@Override
+		public void buildTestSuite(SuiteBuilder sb) {
+			suiteBuilder = sb;
+		}
+	}
+
 {
-	describe("JMineRunner tests", () -> {
+	describe("JMineRunner", () -> {
 
 		beforeEach(() -> {
 			calls = new ArrayList<>();
 			runner = new JMineRunner(TestClass.class);
 		});
 
-		describe("when getChildren() is called", () -> {
-			it("should return a list containing all specs from the passed test class", () -> {
-				List<Spec> specs = runner.getChildren();
+		describe("when specs are obtained from the test class using getChildren()", () -> {
+
+			beforeEach(() -> {
+				specs = runner.getChildren();
+			});
+
+			it("returns a list that contains all specs", () -> {
 				List specNames = specs.stream().map(Spec::getDescription).collect(Collectors.toList());
 				assertEquals(Arrays.asList("outer it", "inner it"), specNames);
+			});
+
+			describe("when the test class implements JMineTest", () -> {
+				beforeEach(() -> {
+					JMineTestImplementingTestClass.suiteBuilder = null;
+					runner = new JMineRunner(JMineTestImplementingTestClass.class);
+					runner.getChildren();
+				});
+
+				it("calls buildTestSuite() and passes a SuiteBuilder instance", () -> {
+					assertNotNull(JMineTestImplementingTestClass.suiteBuilder);
+				});
 			});
 		});
 
 		describe("when a spec is executed", () -> {
-
 			beforeEach(() -> {
 				suite = new Suite(null, "suite");
 			});
 
-			it("should execute beforeEach() callbacks before the spec is executed", () -> {
+			it("executes beforeEach handlers before the spec is executed", () -> {
 				suite.addBeforeEachHandler(block.apply("before"));
-				Spec spec = new Spec(suite, "spec", block.apply("spec"));
-				runner.runChild(spec, new RunNotifier());
+				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
 				assertEquals(Arrays.asList("before", "spec"), calls);
 			});
 
-			it("should execute afterEach() callbacks after the spec is executed", () -> {
+			it("executes afterEach handlers after the spec is executed", () -> {
 				suite.addAfterEachHandler(block.apply("after"));
-				Spec spec = new Spec(suite, "spec", block.apply("spec"));
-				runner.runChild(spec, new RunNotifier());
+				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
 				assertEquals(Arrays.asList("spec", "after"), calls);
 			});
 
-			it("should execute outer beforeEach() calls before inner ones", () -> {
+			it("executes outer beforeEach handlers before inner ones", () -> {
 				suite.addBeforeEachHandler(block.apply("outer"));
 				Suite child = new Suite(suite, "child");
 				child.addBeforeEachHandler(block.apply("inner"));
-				Spec spec = new Spec(child, "spec", () -> {});
-				runner.runChild(spec, new RunNotifier());
+				runner.runChild(new Spec(child, "spec", () -> {
+				}), new RunNotifier());
 				assertEquals(Arrays.asList("outer", "inner"), calls);
 			});
 
-			it("should execute inner afterEach() calls before outer ones", () -> {
+			it("executes inner afterEach handlers calls before outer ones", () -> {
 				suite.addAfterEachHandler(block.apply("outer"));
 				Suite child = new Suite(suite, "child");
 				child.addAfterEachHandler(block.apply("inner"));
-				Spec spec = new Spec(child, "spec", () -> {});
-				runner.runChild(spec, new RunNotifier());
+				runner.runChild(new Spec(child, "spec", () -> {
+				}), new RunNotifier());
 				assertEquals(Arrays.asList("inner", "outer"), calls);
 			});
 		});
