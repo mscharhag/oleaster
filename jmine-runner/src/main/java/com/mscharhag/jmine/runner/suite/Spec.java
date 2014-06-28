@@ -24,7 +24,11 @@ public class Spec extends Statement {
 	}
 
 	public String getFullDescription() {
-		return suite.getDescription() + ", " + this.description;
+		String suiteDescription = suite.getFullDescription();
+		if (suiteDescription != null) {
+			return String.format("%s, it %s", suiteDescription, this.description);
+		}
+		return String.format("it %s", this.description);
 	}
 
 	@Override

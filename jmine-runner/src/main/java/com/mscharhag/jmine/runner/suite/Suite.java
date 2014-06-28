@@ -67,6 +67,16 @@ public class Suite {
 		return description;
 	}
 
+	public String getFullDescription() {
+		if (this.parent != null) {
+			String parentDescription = this.parent.getFullDescription();
+			if (parentDescription != null) {
+				return String.format("%s, %s", parentDescription, this.description);
+			}
+		}
+		return this.description;
+	}
+
 	public List<Suite> getSuites() {
 		return suites;
 	}
