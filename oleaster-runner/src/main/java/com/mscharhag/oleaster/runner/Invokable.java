@@ -13,32 +13,10 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner.suite;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.Invokable;
+public interface Invokable {
 
-public class SuiteDefinition {
+	void invoke() throws Exception;
 
-	private Suite parent;
-	private String description;
-	private Invokable block;
-
-
-	public SuiteDefinition(Suite parent, String description, Invokable block) {
-		this.parent = parent;
-		this.description = description;
-		this.block = block;
-	}
-
-	public Suite getParent() {
-		return parent;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public Invokable getBlock() {
-		return block;
-	}
 }

@@ -13,9 +13,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner.suite;
+package com.mscharhag.oleaster.runner.suite;
 
-import com.mscharhag.jmine.runner.Invokable;
+import com.mscharhag.oleaster.runner.Invokable;
 
 import java.util.ArrayList;
 import java.util.List;

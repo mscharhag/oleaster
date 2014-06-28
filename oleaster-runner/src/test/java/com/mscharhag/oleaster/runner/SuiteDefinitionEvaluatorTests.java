@@ -1,19 +1,19 @@
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
-import com.mscharhag.jmine.runner.suite.Spec;
-import com.mscharhag.jmine.runner.suite.Suite;
-import com.mscharhag.jmine.runner.suite.SuiteDefinition;
-import com.mscharhag.jmine.runner.suite.SuiteDefinitionEvaluator;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
+import com.mscharhag.oleaster.runner.suite.Spec;
+import com.mscharhag.oleaster.runner.suite.Suite;
+import com.mscharhag.oleaster.runner.suite.SuiteDefinition;
+import com.mscharhag.oleaster.runner.suite.SuiteDefinitionEvaluator;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
-import static com.mscharhag.jmine.runner.AssertUtil.assertEmptySuiteCollections;
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteCollections;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(JMineRunner.class)
+@RunWith(OleasterRunner.class)
 public class SuiteDefinitionEvaluatorTests {
 
 	private SuiteDefinitionEvaluator sde;

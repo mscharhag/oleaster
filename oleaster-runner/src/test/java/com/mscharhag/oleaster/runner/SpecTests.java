@@ -1,15 +1,15 @@
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.suite.Spec;
-import com.mscharhag.jmine.runner.suite.Suite;
+import com.mscharhag.oleaster.runner.suite.Spec;
+import com.mscharhag.oleaster.runner.suite.Suite;
 import org.junit.runner.RunWith;
 
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.beforeEach;
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.describe;
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.it;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.beforeEach;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.describe;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.it;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(JMineRunner.class)
+@RunWith(OleasterRunner.class)
 public class SpecTests {
 
 	private Suite suite;

@@ -1,17 +1,17 @@
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
-import static com.mscharhag.jmine.runner.AssertUtil.assertEmptySuiteBuilderCollections;
-import static com.mscharhag.jmine.runner.AssertUtil.expect;
+import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteBuilderCollections;
+import static com.mscharhag.oleaster.runner.AssertUtil.expect;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 
-@RunWith(JMineRunner.class)
+@RunWith(OleasterRunner.class)
 public class SuiteBuilderTests {
 
 	private Invokable invokable = () -> {};

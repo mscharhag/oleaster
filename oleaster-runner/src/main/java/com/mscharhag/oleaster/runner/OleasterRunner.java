@@ -13,14 +13,14 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.suite.StaticSupportingSuiteBuilder;
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
-import com.mscharhag.jmine.runner.suite.Spec;
-import com.mscharhag.jmine.runner.suite.Suite;
-import com.mscharhag.jmine.runner.suite.SuiteDefinition;
-import com.mscharhag.jmine.runner.suite.SuiteDefinitionEvaluator;
+import com.mscharhag.oleaster.runner.suite.StaticSupportingSuiteBuilder;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
+import com.mscharhag.oleaster.runner.suite.Spec;
+import com.mscharhag.oleaster.runner.suite.Suite;
+import com.mscharhag.oleaster.runner.suite.SuiteDefinition;
+import com.mscharhag.oleaster.runner.suite.SuiteDefinitionEvaluator;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
@@ -31,9 +31,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-public class JMineRunner extends ParentRunner<Spec> {
+public class OleasterRunner extends ParentRunner<Spec> {
 
-	public JMineRunner(Class<?> testClass) throws InitializationError {
+	public OleasterRunner(Class<?> testClass) throws InitializationError {
 		super(testClass);
 	}
 
@@ -78,8 +78,8 @@ public class JMineRunner extends ParentRunner<Spec> {
 	protected SuiteDefinition createBaseSuiteDefinition(SuiteBuilder suiteBuilder) {
 		return new SuiteDefinition(null, null, () -> {
 			Object obj = getTestClass().getJavaClass().newInstance();
-			if (obj instanceof JMineTest) {
-				((JMineTest) obj).buildTestSuite(suiteBuilder);
+			if (obj instanceof OleasterTest) {
+				((OleasterTest) obj).buildTestSuite(suiteBuilder);
 			}
 		});
 	}

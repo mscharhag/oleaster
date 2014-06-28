@@ -13,13 +13,19 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner.suite;
 
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
+public class StaticSupportingSuiteBuilder extends SuiteBuilder {
 
+	@Override
+	public void beforeEvaluation() {
+		super.beforeEvaluation();
+		StaticSuiteBuilderSupport.setSuiteBuilder(this);
+	}
 
-public interface JMineTest {
-
-	public void buildTestSuite(SuiteBuilder sb);
-
+	@Override
+	public void afterEvaluation() {
+		super.afterEvaluation();
+		StaticSuiteBuilderSupport.setSuiteBuilder(null);
+	}
 }

@@ -1,11 +1,10 @@
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import static com.mscharhag.jmine.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 
-import com.mscharhag.jmine.runner.suite.Spec;
-import com.mscharhag.jmine.runner.suite.Suite;
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
-import org.junit.runner.Description;
+import com.mscharhag.oleaster.runner.suite.Spec;
+import com.mscharhag.oleaster.runner.suite.Suite;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 import org.junit.runner.RunWith;
 import org.junit.runner.notification.RunNotifier;
 
@@ -15,13 +14,13 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@RunWith(JMineRunner.class)
-public class JMineRunnerTests {
+@RunWith(OleasterRunner.class)
+public class OleasterRunnerTests {
 
 	private static List<String> calls;
 	private static Function<String, Invokable> block = (String name) -> () -> { calls.add(name); };
 
-	private JMineRunner runner;
+	private OleasterRunner runner;
 	private Suite suite;
 	private List<Spec> specs;
 
@@ -35,7 +34,7 @@ public class JMineRunnerTests {
 	}}
 
 
-	public static class JMineTestImplementingTestClass implements JMineTest {
+	public static class OleasterTestImplementingTestClass implements OleasterTest {
 
 		public static SuiteBuilder suiteBuilder;
 
@@ -46,11 +45,11 @@ public class JMineRunnerTests {
 	}
 
 {
-	describe("JMineRunner", () -> {
+	describe("OleasterRunner", () -> {
 
 		beforeEach(() -> {
 			calls = new ArrayList<>();
-			runner = new JMineRunner(TestClass.class);
+			runner = new OleasterRunner(TestClass.class);
 		});
 
 		describe("when specs are obtained from the test class using getChildren()", () -> {
@@ -64,15 +63,15 @@ public class JMineRunnerTests {
 				assertEquals(Arrays.asList("outer it", "inner it"), specNames);
 			});
 
-			describe("when the test class implements JMineTest", () -> {
+			describe("when the test class implements OleasterTest", () -> {
 				beforeEach(() -> {
-					JMineTestImplementingTestClass.suiteBuilder = null;
-					runner = new JMineRunner(JMineTestImplementingTestClass.class);
+					OleasterTestImplementingTestClass.suiteBuilder = null;
+					runner = new OleasterRunner(OleasterTestImplementingTestClass.class);
 					runner.getChildren();
 				});
 
 				it("calls buildTestSuite() and passes a SuiteBuilder instance", () -> {
-					assertNotNull(JMineTestImplementingTestClass.suiteBuilder);
+					assertNotNull(OleasterTestImplementingTestClass.suiteBuilder);
 				});
 			});
 		});

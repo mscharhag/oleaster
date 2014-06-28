@@ -13,19 +13,13 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner.suite;
+package com.mscharhag.oleaster.runner;
 
-public class StaticSupportingSuiteBuilder extends SuiteBuilder {
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
-	@Override
-	public void beforeEvaluation() {
-		super.beforeEvaluation();
-		StaticSuiteBuilderSupport.setSuiteBuilder(this);
-	}
 
-	@Override
-	public void afterEvaluation() {
-		super.afterEvaluation();
-		StaticSuiteBuilderSupport.setSuiteBuilder(null);
-	}
+public interface OleasterTest {
+
+	public void buildTestSuite(SuiteBuilder sb);
+
 }

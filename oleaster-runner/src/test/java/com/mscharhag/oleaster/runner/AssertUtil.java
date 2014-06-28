@@ -1,7 +1,7 @@
-package com.mscharhag.jmine.runner;
+package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.jmine.runner.suite.Suite;
-import com.mscharhag.jmine.runner.suite.SuiteBuilder;
+import com.mscharhag.oleaster.runner.suite.Suite;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

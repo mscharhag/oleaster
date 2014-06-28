@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package com.mscharhag.jmine.runner.suite;
+package com.mscharhag.oleaster.runner.suite;
 
 public class SuiteDefinitionEvaluator {
 
