@@ -3,8 +3,6 @@ Oleaster
 
 Oleaster is a small JUnit Runner that allows you writing JUnit tests like you would write [Jasmine][1] tests.
 
-[source,java,indent=0]
-----
 	@RunWith(OleasterRunner.class)
 	public class AudioPlayerTests {
 		private AudioPlayer player;
@@ -35,6 +33,5 @@ Oleaster is a small JUnit Runner that allows you writing JUnit tests like you wo
 			});
 		});
 	}}
-----
 
 [1]: http://jasmine.github.io/
