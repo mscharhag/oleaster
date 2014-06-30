@@ -12,7 +12,7 @@ import java.util.Arrays;
 import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 
 @RunWith(OleasterRunner.class)
-public class SuiteBuilderTests {
+public class SuiteBuilderTest {
 
 	private Invokable invokable = () -> {};
 	private SuiteBuilder suiteBuilder;

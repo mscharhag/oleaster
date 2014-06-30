@@ -14,7 +14,7 @@ import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(OleasterRunner.class)
-public class SuiteDefinitionEvaluatorTests {
+public class SuiteDefinitionEvaluatorTest {
 
 	private SuiteDefinitionEvaluator sde;
 	private SuiteBuilder sb;

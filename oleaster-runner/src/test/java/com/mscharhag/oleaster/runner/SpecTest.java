@@ -10,7 +10,7 @@ import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.it;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(OleasterRunner.class)
-public class SpecTests {
+public class SpecTest {
 
 	private Suite suite;
 	private Spec spec;

@@ -15,7 +15,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RunWith(OleasterRunner.class)
-public class OleasterRunnerTests {
+public class OleasterRunnerTest {
 
 	private static List<String> calls;
 	private static Function<String, Invokable> block = (String name) -> () -> { calls.add(name); };
