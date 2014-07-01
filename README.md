@@ -21,7 +21,7 @@ public class MyTest {{
 
 So far Oleaster is mainly a prototype and not intended for production use.
 
-If you want to try Oleaster you can use the current development snapshot. Downloadable jar files can found in the jars section.
+If you want to try Oleaster you can use the current development snapshot. Downloadable jar files can found in the [jars folder](https://github.com/mscharhag/oleaster/tree/master/jars).
 
 Maven dependency:
 ```
@@ -82,34 +82,37 @@ import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
 
 @RunWith(OleasterRunner.class)
 public class AudioPlayerTests {
+
 	private AudioPlayer player;
 	private Track track;
-{
-	describe("Tests for AudioPlayer", () -> {
-		beforeEach(() -> { // create a new audio player before each test
-			player = new AudioPlayer();
-		});
 
-		it("should set the initial player state to stopped", () -> {
-			assertEquals(PlayerState.stopped, player.getState());
-		});
-
-		describe("when a track is played", () -> {
-			beforeEach(() -> {
-				track = new Track("/foo/bar/baz.mp3");
-				player.play(track);
+	public AudioPlayerTests() {
+		describe("Tests for AudioPlayer", () -> {
+			beforeEach(() -> { // create a new audio player before each test
+				player = new AudioPlayer();
 			});
 
-			it("sets the player state to playing", () -> {
-				assertEquals(PlayerState.playing, player.getState());
+			it("should set the initial player state to stopped", () -> {
+				assertEquals(PlayerState.stopped, player.getState());
 			});
 
-			it("sets the current track", () -> {
-				assertEquals(track, player.getCurrentTrack());
+			describe("when a track is played", () -> {
+				beforeEach(() -> {
+					track = new Track("/foo/bar/baz.mp3");
+					player.play(track);
+				});
+
+				it("sets the player state to playing", () -> {
+					assertEquals(PlayerState.playing, player.getState());
+				});
+
+				it("sets the current track", () -> {
+					assertEquals(track, player.getCurrentTrack());
+				});
 			});
 		});
-	});
-}}
+	}
+}
 ```
 
 For more examples you can have a look at Oleaster tests which are written in Oleaster itself.
