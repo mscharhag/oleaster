@@ -1,7 +1,73 @@
 Oleaster
 =====
 
-Oleaster is a small JUnit Runner that allows you writing JUnit tests like you would write [Jasmine][1] tests.
+Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you would write [Jasmine][http://jasmine.github.io/] tests.
+
+```java
+import static org.junit.Assert.*;
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
+
+@RunWith(OleasterRunner.class)
+public class MyTest {{
+	describe("A suite", () -> {
+		it("contains spec with an assertion", () -> {
+			assertEquals(2, 1 + 1);
+		});
+	});
+}}
+```
+
+## Setup
+
+So far Oleaster is mainly a prototype and not intended for production use.
+
+If you want to try Oleaster you can use the current development snapshot. Downloadable jar files can found in the jars section.
+
+Maven dependency:
+```
+<dependencies>
+	<dependency>
+		<groupId>com.mscharhag.oleaster</groupId>
+		<artifactId>oleaster-runner</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+</dependencies>
+```
+
+Oleaster is currently hosted by Sonatype. So make sure to add the Sonatype repository to your pom.xml
+```
+<repositories>
+	<repository>
+		<id>sonatype-snapshots</id>
+		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	</repository>
+</repositories>
+```
+
+## Suites and Specs
+
+Suites are used to describe your tests. A suite is created by using the static Oleaster.describe() method.
+describe() takes a String and an Invokable instance as parameter. The String parameter is used to describe the purpose of your tests.
+Invokable is a single method interface that is typically implemented using a Java 8 lambda expression. It represents
+the piece of code that implements the suite and (typically) contains specs.
+
+```
+describe("describes your suite", () -> {
+	// suite implementation
+});
+```
+
+A Spec is used to test the state of the code. Specs are created using the static Oleaster.it() method. Like describe(),
+it() a String and an Invokable instance as parameter. The String describes the test while the Invokable implements the
+actual test.
+
+```
+it("describes your test", () -> {
+	// use assertions to check the expected result
+});
+```
+
+## Examples
 
 Example usage:
 
@@ -42,6 +108,8 @@ public class AudioPlayerTests {
 }}
 ```
 
+For more examples you can have a look at Oleaster tests which are written in Oleaster itself.
+
 ## License
 
 This software is licensed under the Apache 2 license, quoted below.
@@ -59,4 +127,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-[1]: http://jasmine.github.io/
