@@ -21,7 +21,7 @@ public class MyTest {{
 
 So far Oleaster is mainly a prototype and not intended for production use.
 
-If you want to try Oleaster you can use the current development snapshot. Downloadable jar files can found in the [jars folder](https://github.com/mscharhag/oleaster/tree/master/jars).
+If you want to try Oleaster you can use the current development snapshot.
 
 Maven dependency:
 ```
