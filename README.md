@@ -115,7 +115,7 @@ public class AudioPlayerTests {
 }
 ```
 
-For more examples you can have a look at Oleaster tests which are written in Oleaster itself.
+For more examples you can have a look at [Oleaster tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) which are written in Oleaster itself.
 
 ## License
 
