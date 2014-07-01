@@ -1,7 +1,7 @@
 Oleaster
 =====
 
-Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you would write [Jasmine][http://jasmine.github.io/] tests.
+Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you would write [Jasmine](http://jasmine.github.io/) tests.
 
 ```java
 import static org.junit.Assert.*;
@@ -46,22 +46,26 @@ Oleaster is currently hosted by Sonatype. So make sure to add the Sonatype repos
 
 ## Suites and Specs
 
-Suites are used to describe your tests. A suite is created by using the static Oleaster.describe() method.
-describe() takes a String and an Invokable instance as parameter. The String parameter is used to describe the purpose of your tests.
-Invokable is a single method interface that is typically implemented using a Java 8 lambda expression. It represents
+Suites are used to describe your tests. A suite is created by using the static `Oleaster.describe()` method.
+`describe()` takes a `String` and an `Invokable` instance as parameter. The String parameter is used to describe the purpose of your tests.
+`Invokable` is a single method interface that is typically implemented using a Java 8 lambda expression. It represents
 the piece of code that implements the suite and (typically) contains specs.
 
-```
+```java
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.describe;
+...
 describe("describes your suite", () -> {
 	// suite implementation
 });
 ```
 
-A Spec is used to test the state of the code. Specs are created using the static Oleaster.it() method. Like describe(),
-it() a String and an Invokable instance as parameter. The String describes the test while the Invokable implements the
+A Spec is used to test the state of the code. Specs are created using the static `Oleaster.it()` method. Like `describe()`,
+`it()` a `String` and an `Invokable` instance as parameter. The String describes the test while the `Invokable` implements the
 actual test.
 
-```
+```java
+import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.it;
+...
 it("describes your test", () -> {
 	// use assertions to check the expected result
 });
