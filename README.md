@@ -52,7 +52,7 @@ Suites are used to describe your tests. A suite is created by using the static `
 the piece of code that implements the suite and (typically) contains specs.
 
 ```java
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.describe;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.describe;
 ...
 describe("describes your suite", () -> {
 	// suite implementation
@@ -64,7 +64,7 @@ A Spec is used to test the state of the code. Specs are created using the static
 actual test.
 
 ```java
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.it;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.it;
 ...
 it("describes your test", () -> {
 	// use assertions to check the expected result
@@ -73,11 +73,11 @@ it("describes your test", () -> {
 
 ## Examples
 
-Example usage:
+Example usage of Oleaster:
 
 ```java
 import static org.junit.Assert.*;
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 ...
 
 @RunWith(OleasterRunner.class)
