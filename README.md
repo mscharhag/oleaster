@@ -5,7 +5,7 @@ Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you 
 
 ```java
 import static org.junit.Assert.*;
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 
 @RunWith(OleasterRunner.class)
 public class MyTest {{
