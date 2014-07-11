@@ -15,6 +15,17 @@
 */
 package com.mscharhag.oleaster.runner;
 
+/**
+ * An Invokable represents a block of code in Oleaster.
+ * Common Oleaster functions like {@code describe()} or {@code beforeEach()}
+ * take an Invokable as parameter. These Invokable instances are then evaluated by Oleaster
+ * to build a set of test suites.
+ *
+ * <p>Invokable is typically implemented using a Lambda expression.</p>
+ *
+ * Invokable is similar to {@code Runnable}. The only difference is that Invokable allows you to
+ * throw checked exceptions.
+ */
 public interface Invokable {
 
 	void invoke() throws Exception;

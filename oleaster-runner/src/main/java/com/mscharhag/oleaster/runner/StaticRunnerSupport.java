@@ -19,24 +19,64 @@ import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
 public class StaticRunnerSupport {
 
+	private StaticRunnerSupport() {
+
+	}
+
 	private static SuiteBuilder suiteBuilder;
 
 	static void setSuiteBuilder(SuiteBuilder sb) {
 		suiteBuilder = sb;
 	}
 
+	/**
+	 * Creates a new test suite.
+	 * Test suites can contain specs (defined by using {@code it()} and
+	 * {@code beforeEach()}/{@code afterEach()} handlers.
+	 * For example:
+	 * <pre>{@code
+	 * describe("my test suite", () -> {
+	 *     ...
+	 * });
+	 * }</pre>
+	 * @param text A description of the test suite
+	 * @param block A code block that represents the test suite
+	 */
 	public static void describe(String text, Invokable block) {
 		suiteBuilder.describe(text, block);
 	}
 
+
+	/**
+	 * Create a new spec.
+	 * Specs are used to validate a specific test condition. Specs always need to be enclosed by a test suite
+	 * (see {@code describe()}).
+	 * For example:
+	 * <pre>{@code
+	 * it("returns a list containing one item", () -> {
+	 *   assertEquals(1, getList().size());
+	 * });
+	 * }</pre>
+	 * @param text A description of the expected behavior
+	 * @param block A code block that implements the validation
+	 */
 	public static void it(String text, Invokable block) {
 		suiteBuilder.it(text, block);
 	}
 
+
+	/**
+	 * Creates a new {@code beforeEach} handler for the surrounding test suite.
+	 * @param block A code block that is executed before every spec execution
+	 */
 	public static void beforeEach(Invokable block) {
 		suiteBuilder.beforeEach(block);
 	}
 
+	/**
+	 * Creates a new {@code afterEach} handler for the surrounding test suite.
+	 * @param block A code block that is executed after every spec execution
+	 */
 	public static void afterEach(Invokable block) {
 		suiteBuilder.afterEach(block);
 	}
