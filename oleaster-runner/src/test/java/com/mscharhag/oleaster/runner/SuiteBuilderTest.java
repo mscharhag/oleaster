@@ -5,18 +5,18 @@ import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteBuilderCollections;
 import static com.mscharhag.oleaster.runner.AssertUtil.expect;
 import static org.junit.Assert.*;
+
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 
 @RunWith(OleasterRunner.class)
 public class SuiteBuilderTest {
 
 	private Invokable invokable = () -> {};
 	private SuiteBuilder suiteBuilder;
-
 {
 	describe("SuiteBuilder", () -> {
 

@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import java.util.Arrays;
 
 import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteCollections;
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.*;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(OleasterRunner.class)

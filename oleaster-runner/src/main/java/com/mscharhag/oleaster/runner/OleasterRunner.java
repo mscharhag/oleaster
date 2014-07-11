@@ -15,7 +15,6 @@
 */
 package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.oleaster.runner.suite.StaticSupportingSuiteBuilder;
 import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 import com.mscharhag.oleaster.runner.suite.Spec;
 import com.mscharhag.oleaster.runner.suite.Suite;

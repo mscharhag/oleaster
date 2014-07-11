@@ -4,9 +4,9 @@ import com.mscharhag.oleaster.runner.suite.Spec;
 import com.mscharhag.oleaster.runner.suite.Suite;
 import org.junit.runner.RunWith;
 
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.beforeEach;
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.describe;
-import static com.mscharhag.oleaster.runner.suite.StaticSuiteBuilderSupport.it;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.beforeEach;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.describe;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.it;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(OleasterRunner.class)
@@ -53,6 +53,7 @@ public class SpecTest {
 		});
 
 		describe("when the suite does not return a description", () -> {
+			String str = "foo";
 			beforeEach(() -> {
 				suite = new Suite(null, null);
 				spec = new Spec(suite, "test spec", emptyInvokable);
