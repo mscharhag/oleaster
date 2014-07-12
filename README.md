@@ -6,6 +6,7 @@ Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you 
 ```java
 import static org.junit.Assert.*;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
+import com.mscharhag.oleaster.runner.OleasterRunner;
 
 @RunWith(OleasterRunner.class)
 public class MyTest {{
@@ -31,6 +32,13 @@ Maven dependency:
 		<artifactId>oleaster-runner</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</dependency>
+
+	<!-- Oleaster requires JUnit -->
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.11</version>
+	</dependency>
 </dependencies>
 ```
 
@@ -42,6 +50,24 @@ Oleaster is currently hosted by Sonatype. So make sure to add the Sonatype repos
 		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 	</repository>
 </repositories>
+```
+
+Do not forget to set the Java of your project to Java 8 (for using Lambda expressions).
+In Maven you can do this using the Maven compiler plugin:
+```
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.1</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
 ```
 
 ## Suites and Specs
@@ -78,6 +104,7 @@ Example usage of Oleaster:
 ```java
 import static org.junit.Assert.*;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
+import com.mscharhag.oleaster.runner.OleasterRunner;
 ...
 
 @RunWith(OleasterRunner.class)
