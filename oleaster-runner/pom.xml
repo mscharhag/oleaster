@@ -12,7 +12,7 @@
 
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-runner</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Oleaster</name>
 	<description>A JUnit runner to write Jasmine like JUnit tests</description>
