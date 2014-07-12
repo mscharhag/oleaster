@@ -21,11 +21,10 @@ public class MyTest {{
 ## Setup
 
 So far Oleaster is mainly a prototype and not intended for production use.
-
 If you want to try Oleaster you can use the current development snapshot.
 
 Maven dependency:
-```
+```xml
 <dependencies>
 	<dependency>
 		<groupId>com.mscharhag.oleaster</groupId>
@@ -43,7 +42,7 @@ Maven dependency:
 ```
 
 Oleaster is currently hosted by Sonatype. So make sure to add the Sonatype repository to your pom.xml
-```
+```xml
 <repositories>
 	<repository>
 		<id>sonatype-snapshots</id>
@@ -52,9 +51,9 @@ Oleaster is currently hosted by Sonatype. So make sure to add the Sonatype repos
 </repositories>
 ```
 
-Do not forget to set the Java of your project to Java 8 (for using Lambda expressions).
-In Maven you can do this using the Maven compiler plugin:
-```
+Do not forget to set the Java version of your project to Java 8 (for using Lambda expressions).
+In Maven you can do this by using the Maven compiler plugin:
+```xml
 <build>
 	<plugins>
 		<plugin>
@@ -72,7 +71,7 @@ In Maven you can do this using the Maven compiler plugin:
 
 ## Suites and Specs
 
-Suites are used to describe your tests. A suite is created by using the static `Oleaster.describe()` method.
+Suites are used to describe your tests. A suite is created by using the static `StaticRunnerSupport.describe()` method.
 `describe()` takes a `String` and an `Invokable` instance as parameter. The String parameter is used to describe the purpose of your tests.
 `Invokable` is a single method interface that is typically implemented using a Java 8 lambda expression. It represents
 the piece of code that implements the suite and (typically) contains specs.
@@ -85,8 +84,8 @@ describe("describes your suite", () -> {
 });
 ```
 
-A Spec is used to test the state of the code. Specs are created using the static `Oleaster.it()` method. Like `describe()`,
-`it()` a `String` and an `Invokable` instance as parameter. The String describes the test while the `Invokable` implements the
+A Spec is used to test the state of the code. Specs are created using the static `StaticRunnerSupport.it()` method. Like `describe()`,
+`it()` takes a `String` and an `Invokable` instance as parameter. The String describes the test while the `Invokable` implements the
 actual test.
 
 ```java
@@ -115,14 +114,23 @@ public class AudioPlayerTests {
 
 	public AudioPlayerTests() {
 		describe("Tests for AudioPlayer", () -> {
-			beforeEach(() -> { // create a new audio player before each test
+
+			// beforeEach handlers run before a spec is executed
+			beforeEach(() -> {
 				player = new AudioPlayer();
 			});
 
+			// afterEach handlers run after a spec is executed
+			afterEach(() -> {
+				player.stop();
+			});
+
+			// A simple spec
 			it("should set the initial player state to stopped", () -> {
 				assertEquals(PlayerState.stopped, player.getState());
 			});
 
+			// Test suites can be nested
 			describe("when a track is played", () -> {
 				beforeEach(() -> {
 					track = new Track("/foo/bar/baz.mp3");
