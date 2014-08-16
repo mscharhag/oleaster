@@ -53,7 +53,6 @@ public class SpecTest {
 		});
 
 		describe("when the suite does not return a description", () -> {
-			String str = "foo";
 			beforeEach(() -> {
 				suite = new Suite(null, null);
 				spec = new Spec(suite, "test spec", emptyInvokable);
