@@ -3,12 +3,34 @@
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-matcher</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>Oleaster Matcher</name>
+	<packaging>jar</packaging>
+	<description>Jasmine like matchers for Oleaster</description>
+	<url>https://github.com/mscharhag/oleaster</url>
+
+	<scm>
+		<url>https://github.com/mscharhag/oleaster</url>
+		<connection>scm:git:git://github.com/mscharhag/oleaster.git</connection>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
 
 	<developers>
 		<developer>
@@ -32,7 +54,6 @@
 		</dependency>
 
 	</dependencies>
-
 
 	<build>
 		<plugins>
