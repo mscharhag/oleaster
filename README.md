@@ -96,6 +96,61 @@ it("describes your test", () -> {
 });
 ```
 
+## Matchers
+
+Oleaster provides its own matching methods you can use to check for the expected test result. Note that you do not have 
+to use Oleaster matchers. There is no problem with using the standard JUnit assert methods or libraries like [Hamcrest].
+(https://code.google.com/p/hamcrest/).
+
+```java
+it("shows different assertion styles", () -> {
+	int value = 42;
+	
+	// standard JUnit
+	assertEquals(42, value);
+	 
+	// Hamcrest
+	assertThat(value, equalTo(42));
+	 
+	// Jasmine / Oleaster
+	expect(value).toEqual(42); 
+});
+```
+
+In order to use Oleaster matchers you need the `oleaster-matcher` artifact:
+```xml
+<dependency>
+	<groupId>com.mscharhag.oleaster</groupId>
+	<artifactId>oleaster-matcher</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
+Note that `oleaster-matcher` translates directly to JUnit assertions and does not require the use of the `OleasterRunner` JUnit runner.
+So, you can also use oleaster matchers in your standard JUnit tests if you like.
+
+Matcher objects are created by using on of the various static `expect()` methods of `com.mscharhag.oleaster.matcher.Matchers`. 
+ 
+Usage:
+```java
+// static import, make sure not to forget this
+import static com.mscharhag.oleaster.matcher.Matchers.*;
+
+it("shows some matcher examples", () -> {
+
+	// comparing simple primitive values
+	expect(40 + 2).toEqual(42); 
+	expect(true).toBeTrue();
+	
+	// comparing objects
+	expect(car).toEqual(car); // uses car.equals()
+	
+	// checking for exceptions
+	expect(() -> {
+		// code that throws IllegalArgumentException
+	}).toFailWith(IllegalArgumentException.class);
+});
+```
+
 ## Examples
 
 Example usage of Oleaster:
