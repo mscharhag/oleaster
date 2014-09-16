@@ -99,9 +99,7 @@ it("describes your test", () -> {
 ## Matchers
 
 Oleaster provides its own matching methods you can use to check for the expected test result. Note that you do not have 
-to use Oleaster matchers. There is no problem with using the standard JUnit assert methods or libraries like [Hamcrest].
-(https://code.google.com/p/hamcrest/).
-
+to use Oleaster matchers. There is no problem with using the standard JUnit assert methods or libraries like [Hamcrest](https://code.google.com/p/hamcrest/).
 ```java
 it("shows different assertion styles", () -> {
 	int value = 42;
@@ -116,7 +114,6 @@ it("shows different assertion styles", () -> {
 	expect(value).toEqual(42); 
 });
 ```
-
 In order to use Oleaster matchers you need the `oleaster-matcher` artifact:
 ```xml
 <dependency>
