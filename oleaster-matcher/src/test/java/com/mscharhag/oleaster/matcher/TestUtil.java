@@ -13,4 +13,14 @@ public class TestUtil {
 			throw new AssertionError("passed code block did not throw an AssertionError");
 		}
 	}
+
+	public static Exception catchException(Runnable runnable) {
+		Exception ex = null;
+		try {
+			runnable.run();
+		} catch (Exception e) {
+			ex = e;
+		}
+		return ex;
+	}
 }
