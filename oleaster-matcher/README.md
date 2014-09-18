@@ -1,6 +1,7 @@
-## Primitive types
+### Primitive types
 
-### Numbers
+#### Numbers
+The following samples show how numbers can be compared.
 
 ```java
 int value = 42;
@@ -20,3 +21,7 @@ expect(value).toBeBetween(40, 45);
 expect(42.0000001).toBeCloseTo(42); // uses default delta of 0.00001
 expect(42.0000001).toBeCloseTo(42, 0.000001);
 ```
+For Numbers two different matcher classes are available:
+
+* [IntegerNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/IntegerNumberMatcher.java) is used to compare integer values (`int`, `long`, `short`, `byte`)
+* [FloatingPointNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/FloatingPointNumberMatcher.java) is used to compare floating point values (`float`, `double`)
