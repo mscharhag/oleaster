@@ -25,3 +25,19 @@ For Numbers two different matcher classes are available:
 
 * [IntegerNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/IntegerNumberMatcher.java) is used to compare integer values (`int`, `long`, `short`, `byte`)
 * [FloatingPointNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/FloatingPointNumberMatcher.java) is used to compare floating point values (`float`, `double`)
+
+### Boolean values
+The following samples show how boolean values can be compared.
+
+```java
+boolean value = true;
+
+// check for a given parameter
+expect(value).toEqual(true);
+
+// check for true/false
+expect(value).toBeTrue();
+expect(value).toBeFalse();
+```
+
+For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used. 
