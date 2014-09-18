@@ -29,7 +29,7 @@ Maven dependency:
 	<dependency>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster-runner</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1.0-SNAPSHOT</version>
 	</dependency>
 
 	<!-- Oleaster requires JUnit -->
@@ -99,7 +99,7 @@ it("describes your test", () -> {
 ## Matchers
 
 Oleaster provides its own matching methods you can use to check for the expected test result. Note that you do not have 
-to use Oleaster matchers. There is no problem with using the standard JUnit assert methods or libraries like [Hamcrest](https://code.google.com/p/hamcrest/).
+to use Oleaster matchers. There is no problem with using the standard JUnit assert methods or libraries like [Hamcrest](https://github.com/hamcrest/JavaHamcrest).
 ```java
 it("shows different assertion styles", () -> {
 	int value = 42;
@@ -119,7 +119,7 @@ In order to use Oleaster matchers you need the `oleaster-matcher` artifact:
 <dependency>
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-matcher</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 </dependency>
 ```
 Note that `oleaster-matcher` translates directly to JUnit assertions and does not require the use of the `OleasterRunner` JUnit runner.
