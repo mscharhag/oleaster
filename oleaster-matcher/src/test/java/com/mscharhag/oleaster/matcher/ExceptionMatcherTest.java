@@ -22,11 +22,19 @@ public class ExceptionMatcherTest {
 				TestUtil.expectAssertionError(() -> matcher.toFailWith(NullPointerException.class));
 			});
 
-			it("does not throw an error if it is checked for the correct exception class", () -> {
+			it("is ok if it is checked for the correct exception class", () -> {
 				matcher.toFailWith(IllegalArgumentException.class);
 			});
 
-			it("does not throw an error if it is checked for a super class of the thrown exception", () -> {
+			it("is ok if it is checked with the correct exception class and the correct message", () -> {
+				matcher.toFailWith(IllegalArgumentException.class, "test exception");
+			});
+
+			it("throws an AssertionError if the exception message is not equal to the expected message", () -> {
+				TestUtil.expectAssertionError(() -> matcher.toFailWith(IllegalArgumentException.class, "foo"));
+			});
+
+			it("is ok if it is checked for a super class of the thrown exception", () -> {
 				matcher.toFailWith(RuntimeException.class);
 			});
 		});

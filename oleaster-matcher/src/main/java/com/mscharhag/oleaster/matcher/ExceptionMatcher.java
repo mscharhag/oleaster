@@ -11,6 +11,19 @@ public class ExceptionMatcher {
 		this.runCodeBlock(block);
 	}
 
+	public <T extends Exception> void toFailWith(Class<T> expectedExceptionClass) {
+		if (expectedExceptionClass == null) {
+			throw new IllegalArgumentException("expectedException cannot be null");
+		}
+		failIfNoExceptionWasThrown(expectedExceptionClass);
+		Assert.assertTrue(expectedExceptionClass.isAssignableFrom(exception.getClass()));
+	}
+
+	public <T extends Exception> void toFailWith(Class<T> expectedExceptionClass, String expectedMessage) {
+		this.toFailWith(expectedExceptionClass);
+		Assert.assertEquals(expectedMessage, this.exception.getMessage());
+	}
+
 	private void runCodeBlock(CodeBlock block) {
 		try {
 			block.run();
@@ -19,11 +32,11 @@ public class ExceptionMatcher {
 		}
 	}
 
-	public <T extends Exception> void toFailWith(Class<T> type) {
+	private <T extends Exception> void failIfNoExceptionWasThrown(Class<T> expectedExceptionClass) {
 		if (this.exception == null) {
-			throw new AssertionError("Expected code block to fail with " + type.getName() + " but it did not throw an exception");
+			throw new AssertionError("Expected code block to fail with " + expectedExceptionClass.getName()
+					+ " but it did not throw an exception");
 		}
-		Assert.assertTrue(type.isAssignableFrom(exception.getClass()));
 	}
 
 	public static interface CodeBlock {
