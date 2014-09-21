@@ -3,5 +3,4 @@ script: mvn clean test
 after_failure:
   - "cat ./target/surefire-reports/*.xml"
 jdk:
-  - oraclejdk8  
-
+  - oraclejdk8
