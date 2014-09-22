@@ -204,6 +204,10 @@ public class AudioPlayerTests {
 
 For more examples you can have a look at [Oleaster tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) which are written in Oleaster itself.
 
+## Miscellaneous
+
+Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
+
 ## License
 
 This software is licensed under the Apache 2 license, quoted below.
