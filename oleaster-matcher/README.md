@@ -1,3 +1,10 @@
+### Introduction
+TODO:
+* static import of `Matchers.*`
+* can be used without oleaster runner
+* java 8
+* maven dependency
+
 ### Primitive types
 
 #### Numbers
@@ -40,4 +47,26 @@ expect(value).toBeTrue();
 expect(value).toBeFalse();
 ```
 
-For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used. 
+For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used.
+ 
+### Strings
+TODO
+ 
+### Exceptions
+To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass
+it to `expect()`. The lambda expression will be executed and thrown exceptions will be caught.
+The thrown exception can be checked with `toFailWith()` as shown bellow:
+
+```java
+// check if an exception is thrown
+expect(() -> {
+	// code that throws IllegalArgumentException
+}).toFailWith(IllegalArgumentException.class);
+
+// with exception message
+expect(() -> {
+	// code that throws IllegalArgumentException
+}).toFailWith(IllegalArgumentException.class, "An argument is invalid");
+```
+
+For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/ExceptionMatcher.java) will be used.
