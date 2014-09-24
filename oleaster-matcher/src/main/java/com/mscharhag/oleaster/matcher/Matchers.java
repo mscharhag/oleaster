@@ -34,6 +34,10 @@ public class Matchers {
 		return new BooleanMatcher(value);
 	}
 
+	public static StringMatcher expect(String value) {
+		return new StringMatcher(value);
+	}
+
 	public static ObjectMatcher expect(Object value) {
 		return new ObjectMatcher(value);
 	}
