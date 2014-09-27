@@ -87,3 +87,9 @@ expect(() -> {
 ```
 
 For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/ExceptionMatcher.java) will be used.
+
+
+### Licence
+Apache 2
+
+TODO: add licence info
