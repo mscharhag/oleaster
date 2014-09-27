@@ -3,9 +3,10 @@ Oleaster
 
 Oleaster is a Java 8 JUnit runner that allows you to write JUnit tests like you would write [Jasmine](http://jasmine.github.io/) tests.
 
-An Oleaster test looks like this:
+An Oleaster JUnit test looks like this:
 
 ```java
+import org.junit.runner.RunWith;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static com.mscharhag.oleaster.matcher.Matchers.*;
