@@ -50,7 +50,24 @@ expect(value).toBeFalse();
 For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used.
  
 ### Strings
-TODO
+The following samples show how String values can be compared.
+
+```java
+// check for exact value
+expect("foo").toEqual("foo");
+
+// check string starting/ending
+expect("foobar").toStartWith("foo");
+expect("foobar").toEndWith("bar");
+
+// check if a String contains a given substring
+expect("foobar").toContain("oba");
+
+// check if a String matches a regular expression
+expect("foobar").toMatch(Pattern.compile("fo+\\w*"));
+expect("foobar").toMatch("fo+\\w*");
+```
+
  
 ### Exceptions
 To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass

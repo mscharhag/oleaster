@@ -1,5 +1,7 @@
 package com.mscharhag.oleaster.matcher;
 
+import com.mscharhag.oleaster.matcher.matchers.*;
+
 public class Matchers {
 
 	public static IntegerNumberMatcher expect(long value) {

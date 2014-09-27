@@ -1,4 +1,4 @@
-package com.mscharhag.oleaster.matcher;
+package com.mscharhag.oleaster.matcher.matchers;
 
 import org.junit.Assert;
 

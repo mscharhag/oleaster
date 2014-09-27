@@ -32,5 +32,9 @@ public class MatchersTest {{
 			expect(true).toBeTrue();
 		});
 
+		it("StringMatcher", () -> {
+			expect("foo").toEndWith("oo");
+		});
+
 	});
 }}

@@ -1,5 +1,7 @@
-package com.mscharhag.oleaster.matcher;
+package com.mscharhag.oleaster.matcher.matchers;
 
+import com.mscharhag.oleaster.matcher.TestUtil;
+import com.mscharhag.oleaster.matcher.matchers.IntegerNumberMatcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;

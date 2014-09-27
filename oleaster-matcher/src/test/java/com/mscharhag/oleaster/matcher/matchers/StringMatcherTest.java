@@ -1,5 +1,6 @@
-package com.mscharhag.oleaster.matcher;
+package com.mscharhag.oleaster.matcher.matchers;
 
+import static com.mscharhag.oleaster.matcher.TestUtil.*;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
@@ -13,33 +14,34 @@ public class StringMatcherTest {{
 
 		describe("when toEqual() is called", () -> {
 			it("fails if both values are not equal", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toEqual("bar"),
-						"Expected 'foo' to be equal 'bar'");
+				expectAssertionError(() -> new StringMatcher("foo").toEqual("bar"), "Expected 'foo' to be equal 'bar'");
 			});
 
 			it("fails if the matcher value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher(null).toEqual("bar"),
-						"Expected null to be equal 'bar'");
+				expectAssertionError(() -> new StringMatcher(null).toEqual("bar"), "Expected null to be equal 'bar'");
 			});
 
 			it("fails if the passed value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toEqual(null),
-						"Expected 'foo' to be equal null");
+				expectAssertionError(() -> new StringMatcher("foo").toEqual(null), "Expected 'foo' to be equal null");
 			});
 
 			it("is ok if both values are equal", () -> {
 				new StringMatcher("foo").toEqual("foo");
 			});
+
+			it("is ok if the stored value and the expected value are null", () -> {
+				new StringMatcher(null).toEqual(null);
+			});
 		});
 
 		describe("when toMatch() is called", () -> {
 			it("fails if the stored value does not match the expected pattern", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toMatch(Pattern.compile("bar")),
+				expectAssertionError(() -> new StringMatcher("foo").toMatch(Pattern.compile("bar")),
 						"Expected 'foo' to match 'bar'");
 			});
 
 			it("fails if the stored value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher(null).toMatch(Pattern.compile("bar")),
+				expectAssertionError(() -> new StringMatcher(null).toMatch(Pattern.compile("bar")),
 						"Expected null to match 'bar'");
 			});
 
@@ -55,13 +57,11 @@ public class StringMatcherTest {{
 
 		describe("when toStartWith() is called", () -> {
 			it("fails if the stored value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher(null).toStartWith("bar"),
-						"Expected null to start with 'bar'");
+				expectAssertionError(() -> new StringMatcher(null).toStartWith("bar"), "Expected null to start with 'bar'");
 			});
 
 			it("fails if the stored value does not start with the expected sub string", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toStartWith("fee"),
-						"Expected 'foo' to start with 'fee'");
+				expectAssertionError(() -> new StringMatcher("foo").toStartWith("fee"), "Expected 'foo' to start with 'fee'");
 			});
 
 			it("is ok if the stored value starts with the expected sub string", () -> {
@@ -72,13 +72,11 @@ public class StringMatcherTest {{
 
 		describe("when toEndWith() is called", () -> {
 			it("fails if the stored value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher(null).toEndWith("bar"),
-						"Expected null to end with 'bar'");
+				expectAssertionError(() -> new StringMatcher(null).toEndWith("bar"), "Expected null to end with 'bar'");
 			});
 
 			it("fails if the stored value does not end with the expected sub string", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toEndWith("fee"),
-						"Expected 'foo' to end with 'fee'");
+				expectAssertionError(() -> new StringMatcher("foo").toEndWith("fee"), "Expected 'foo' to end with 'fee'");
 			});
 
 			it("is ok if the stored value ends with the expected sub string", () -> {
@@ -89,13 +87,11 @@ public class StringMatcherTest {{
 
 		describe("when toContain() is called", () -> {
 			it("fails if the stored value is null", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher(null).toContain("bar"),
-						"Expected null to contain 'bar'");
+				expectAssertionError(() -> new StringMatcher(null).toContain("bar"), "Expected null to contain 'bar'");
 			});
 
 			it("fails if the stored value does not contain the passed value", () -> {
-				TestUtil.expectAssertionError(() -> new StringMatcher("foo").toContain("a"),
-						"Expected 'foo' to contain 'a'");
+				expectAssertionError(() -> new StringMatcher("foo").toContain("a"), "Expected 'foo' to contain 'a'");
 			});
 
 			it("is ok if the stored value contains the passed value", () -> {
