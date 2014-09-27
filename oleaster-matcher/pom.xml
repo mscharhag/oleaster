@@ -20,13 +20,11 @@
 	<description>Jasmine like matchers for Oleaster</description>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.mscharhag.oleaster</groupId>
 			<artifactId>oleaster-runner</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 </project>
