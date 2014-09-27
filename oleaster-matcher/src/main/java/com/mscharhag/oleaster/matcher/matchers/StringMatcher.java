@@ -16,21 +16,6 @@ public class StringMatcher extends ObjectMatcher<String> {
 	}
 
 	/**
-	 * Checks if the stored {@code String} is equal to another {@code String}.
-	 * <p>This method throws an {@code AssertionError} if the stored {@code String} is not equal to {@code other}.
-	 * @param other the value to compare with
-	 */
-	public void toEqual(String other) {
-		String value = this.getValue();
-		if (value == null && other == null) {
-			return;
-		}
-		failIfNull(value, "Expected null to be equal '%s'", other);
-		failIfNull(other, "Expected '%s' to be equal null", value);
-		failIfFalse(value.equals(other), "Expected '%s' to be equal '%s'", value, other);
-	}
-
-	/**
 	 * Checks if the stored {@code String} matches a regular expression.
 	 * <p>This method throws an {@code AssertionError} if
 	 * <ul>

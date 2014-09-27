@@ -12,28 +12,6 @@ import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 public class StringMatcherTest {{
 	describe("StringMatcher test", () -> {
 
-		describe("when toEqual() is called", () -> {
-			it("fails if both values are not equal", () -> {
-				expectAssertionError(() -> new StringMatcher("foo").toEqual("bar"), "Expected 'foo' to be equal 'bar'");
-			});
-
-			it("fails if the matcher value is null", () -> {
-				expectAssertionError(() -> new StringMatcher(null).toEqual("bar"), "Expected null to be equal 'bar'");
-			});
-
-			it("fails if the passed value is null", () -> {
-				expectAssertionError(() -> new StringMatcher("foo").toEqual(null), "Expected 'foo' to be equal null");
-			});
-
-			it("is ok if both values are equal", () -> {
-				new StringMatcher("foo").toEqual("foo");
-			});
-
-			it("is ok if the stored value and the expected value are null", () -> {
-				new StringMatcher(null).toEqual(null);
-			});
-		});
-
 		describe("when toMatch() is called", () -> {
 			it("fails if the stored value does not match the expected pattern", () -> {
 				expectAssertionError(() -> new StringMatcher("foo").toMatch(Pattern.compile("bar")),
