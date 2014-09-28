@@ -1,8 +1,8 @@
 Oleaster Matcher
 =====
 
-Oleaster Matcher is a small library that provides Jasmine-like [Matchers](https://github.com/pivotal/jasmine/wiki/Matchers)
-for JUnit. Oleaster Matcher can be used as a replacement (or extension) for standard JUnit assertions.
+Oleaster Matcher is a small library that provides [Jasmine-like Matchers](https://github.com/pivotal/jasmine/wiki/Matchers)
+for Java. Oleaster Matchers can be used as a replacement (or extension) for standard JUnit assertions.
 
 Expectations written with Oleaster Matchers look like this:
 
@@ -24,8 +24,8 @@ Oleaster Matchers do not depend on the Oleaster JUnit Runner.
 You can use Oleaster Matchers without using the Oleaster JUnit Runner.
   
 ## Getting started
-To use Oleaster Matchers you need the `oleaster-matcher` artifact. 
-If you are using Maven just add the following Maven dependency:
+To use Oleaster Matchers you need `oleaster-matcher.jar` in your classpath. 
+If you are using Maven you just have to add the following dependency:
 
 ```xml
 <dependency>
@@ -36,7 +36,7 @@ If you are using Maven just add the following Maven dependency:
 ```
 
 Matcher objects can be created using one the various static `expect()` methods of the `Matchers` class.
-To improve readability it is recommended to statically import `Matchers.*`:
+To improve readability it is recommended to statically import `Matchers.*`
 ```java
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 ```
@@ -66,8 +66,10 @@ expect(42.0000001).toBeCloseTo(42, 0.000001);
 ```
 For Numbers two different matcher classes are available:
 
-* [IntegerNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/IntegerNumberMatcher.java) is used to compare integer values (`int`, `long`, `short`, `byte`)
-* [FloatingPointNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/FloatingPointNumberMatcher.java) is used to compare floating point values (`float`, `double`)
+* [IntegerNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/IntegerNumberMatcher.java) 
+	is used to compare integer values (`int`, `long`, `short`, `byte`)
+* [FloatingPointNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/FloatingPointNumberMatcher.java)
+ 	is used to compare floating point values (`float`, `double`)
 
 ### Boolean values
 The following samples show how boolean values can be compared.
@@ -83,8 +85,23 @@ expect(value).toBeTrue();
 expect(value).toBeFalse();
 ```
 
-For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used.
- 
+For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/BooleanMatcher.java) will be used.
+
+## Objects
+
+```java
+Person person = new Person("John", "Smith");
+
+// check for equality, delegates to Person.equals()
+expect(person).toEqual(new Person("John", "Smith"));
+
+// check for (not) null
+expect(person).toBeNull(); // fails
+expect(person).toBeNotNull();
+```
+
+For comparing Objects [ObjectMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/ObjectMatcher.java) will be used.
+
 ## Strings
 The following samples show how String values can be compared.
 
@@ -104,7 +121,8 @@ expect("foobar").toMatch(Pattern.compile("fo+\\w*"));
 expect("foobar").toMatch("fo+\\w*");
 ```
 
- 
+For comparing Strings [StringMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/StringMatcher.java) will be used.
+
 ## Exceptions
 To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass
 it to `expect()`. The lambda expression will be executed and thrown exceptions will be caught.
@@ -122,7 +140,7 @@ expect(() -> {
 }).toThrow(IllegalArgumentException.class, "An argument is invalid");
 ```
 
-For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/ExceptionMatcher.java) will be used.
+For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/ExceptionMatcher.java) will be used.
 
 ## Licence
 
