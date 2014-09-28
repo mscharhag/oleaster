@@ -19,6 +19,7 @@
 	<modules>
 		<module>oleaster-runner</module>
 		<module>oleaster-matcher</module>
+		<module>oleaster-examples</module>
 	</modules>
 
 	<url>https://github.com/mscharhag/oleaster</url>

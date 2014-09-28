@@ -10,14 +10,15 @@ Expectations written with Oleaster Matchers look like this:
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 
 // same as JUnit's assertEquals(40 + 2, 42)
-expect(40 + 2).toEqual(42); 
- 
+expect(40 + 2).toEqual(42);
+
 // see if a String matches a regular expression
 expect("foobar").toMatch("fo{2}\\w+");
 
 // test exceptions with Java 8 Lambdas
 expect(() -> {
 	// code that throws IllegalArgumentException
+	throw new IllegalArgumentException();
 }).toThrow(IllegalArgumentException.class);
 ```
 Oleaster Matchers do not depend on the Oleaster JUnit Runner. 
@@ -80,8 +81,11 @@ boolean value = true;
 // check for a given parameter
 expect(value).toEqual(true);
 
-// check for true/false
+// check if true
 expect(value).toBeTrue();
+
+// check if false
+value = false;
 expect(value).toBeFalse();
 ```
 
@@ -95,9 +99,12 @@ Person person = new Person("John", "Smith");
 // check for equality, delegates to Person.equals()
 expect(person).toEqual(new Person("John", "Smith"));
 
-// check for (not) null
-expect(person).toBeNull(); // fails
+// check if not null
 expect(person).toBeNotNull();
+
+// check if null
+person = null;
+expect(person).toBeNull();
 ```
 
 For comparing Objects [ObjectMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/ObjectMatcher.java) will be used.
@@ -132,11 +139,13 @@ The thrown exception can be checked with `toThrow()` as shown bellow:
 // check if an exception is thrown
 expect(() -> {
 	// code that throws IllegalArgumentException
+	throw new IllegalArgumentException();
 }).toThrow(IllegalArgumentException.class);
 
 // with exception message
 expect(() -> {
 	// code that throws IllegalArgumentException
+	throw new IllegalArgumentException("An argument is invalid");
 }).toThrow(IllegalArgumentException.class, "An argument is invalid");
 ```
 
