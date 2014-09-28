@@ -1,13 +1,49 @@
-### Introduction
-TODO:
-* static import of `Matchers.*`
-* can be used without oleaster runner
-* java 8
-* maven dependency
+Oleaster Matcher
+=====
 
-### Primitive types
+Oleaster Matcher is a small library that provides Jasmine-like [Matchers](https://github.com/pivotal/jasmine/wiki/Matchers)
+for JUnit. Oleaster Matcher can be used as a replacement (or extension) for standard JUnit assertions.
 
-#### Numbers
+Expectations written with Oleaster Matchers look like this:
+
+```java
+import static com.mscharhag.oleaster.matcher.Matchers.*;
+
+// same as JUnit's assertEquals(40 + 2, 42)
+expect(40 + 2).toEqual(42); 
+ 
+// see if a String matches a regular expression
+expect("foobar").toMatch("fo{2}\\w+");
+
+// test exceptions with Java 8 Lambdas
+expect(() -> {
+	// code that throws IllegalArgumentException
+}).toThrow(IllegalArgumentException.class);
+```
+Oleaster Matchers do not depend on the Oleaster JUnit Runner. 
+You can use Oleaster Matchers without using the Oleaster JUnit Runner.
+  
+## Getting started
+To use Oleaster Matchers you need the `oleaster-matcher` artifact. 
+If you are using Maven just add the following Maven dependency:
+
+```xml
+<dependency>
+	<groupId>com.mscharhag.oleaster</groupId>
+	<artifactId>oleaster-matcher</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+</dependency>
+```
+
+Matcher objects can be created using one the various static `expect()` methods of the `Matchers` class.
+To improve readability it is recommended to statically import `Matchers.*`:
+```java
+import static com.mscharhag.oleaster.matcher.Matchers.*;
+```
+
+## Primitive types
+
+### Numbers
 The following samples show how numbers can be compared.
 
 ```java
@@ -33,7 +69,7 @@ For Numbers two different matcher classes are available:
 * [IntegerNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/IntegerNumberMatcher.java) is used to compare integer values (`int`, `long`, `short`, `byte`)
 * [FloatingPointNumberMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/FloatingPointNumberMatcher.java) is used to compare floating point values (`float`, `double`)
 
-#### Boolean values
+### Boolean values
 The following samples show how boolean values can be compared.
 
 ```java
@@ -49,7 +85,7 @@ expect(value).toBeFalse();
 
 For comparing boolean values [BooleanMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/BooleanMatcher.java) will be used.
  
-### Strings
+## Strings
 The following samples show how String values can be compared.
 
 ```java
@@ -69,7 +105,7 @@ expect("foobar").toMatch("fo+\\w*");
 ```
 
  
-### Exceptions
+## Exceptions
 To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass
 it to `expect()`. The lambda expression will be executed and thrown exceptions will be caught.
 The thrown exception can be checked with `toThrow()` as shown bellow:
@@ -88,8 +124,20 @@ expect(() -> {
 
 For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/ExceptionMatcher.java) will be used.
 
+## Licence
 
-### Licence
-Apache 2
+This software is licensed under the Apache 2 license, quoted below.
 
-TODO: add licence info
+Copyright 2014 Michael Scharhag
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
