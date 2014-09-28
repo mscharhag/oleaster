@@ -1,7 +1,6 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.matcher.TestUtil;
-import com.mscharhag.oleaster.matcher.matchers.ExceptionMatcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
@@ -20,24 +19,24 @@ public class ExceptionMatcherTest {
 				});
 			});
 
-			it("throws an AssertionError if it is checked for a different exception class", () -> {
-				TestUtil.expectAssertionError(() -> matcher.toFailWith(NullPointerException.class));
+			it("fails if it is checked for a different exception class", () -> {
+				TestUtil.expectAssertionError(() -> matcher.toThrow(NullPointerException.class));
 			});
 
 			it("is ok if it is checked for the correct exception class", () -> {
-				matcher.toFailWith(IllegalArgumentException.class);
+				matcher.toThrow(IllegalArgumentException.class);
 			});
 
 			it("is ok if it is checked with the correct exception class and the correct message", () -> {
-				matcher.toFailWith(IllegalArgumentException.class, "test exception");
+				matcher.toThrow(IllegalArgumentException.class, "test exception");
 			});
 
-			it("throws an AssertionError if the exception message is not equal to the expected message", () -> {
-				TestUtil.expectAssertionError(() -> matcher.toFailWith(IllegalArgumentException.class, "foo"));
+			it("fails if the exception message is not equal to the expected message", () -> {
+				TestUtil.expectAssertionError(() -> matcher.toThrow(IllegalArgumentException.class, "foo"));
 			});
 
 			it("is ok if it is checked for a super class of the thrown exception", () -> {
-				matcher.toFailWith(RuntimeException.class);
+				matcher.toThrow(RuntimeException.class);
 			});
 		});
 
@@ -46,8 +45,12 @@ public class ExceptionMatcherTest {
 				matcher = new ExceptionMatcher(() -> {});
 			});
 
-			it("throws a AssertionError if it is checked for an exception", () -> {
-				TestUtil.expectAssertionError(() -> matcher.toFailWith(IllegalArgumentException.class));
+			it("fails if it is checked for an exception", () -> {
+				TestUtil.expectAssertionError(() -> matcher.toThrow(IllegalArgumentException.class));
+			});
+
+			it("fails if it is checked for an exception and a message", () -> {
+				TestUtil.expectAssertionError(() -> matcher.toThrow(IllegalArgumentException.class, "foo"));
 			});
 		});
 

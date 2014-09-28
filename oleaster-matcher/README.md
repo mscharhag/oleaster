@@ -72,18 +72,18 @@ expect("foobar").toMatch("fo+\\w*");
 ### Exceptions
 To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass
 it to `expect()`. The lambda expression will be executed and thrown exceptions will be caught.
-The thrown exception can be checked with `toFailWith()` as shown bellow:
+The thrown exception can be checked with `toThrow()` as shown bellow:
 
 ```java
 // check if an exception is thrown
 expect(() -> {
 	// code that throws IllegalArgumentException
-}).toFailWith(IllegalArgumentException.class);
+}).toThrow(IllegalArgumentException.class);
 
 // with exception message
 expect(() -> {
 	// code that throws IllegalArgumentException
-}).toFailWith(IllegalArgumentException.class, "An argument is invalid");
+}).toThrow(IllegalArgumentException.class, "An argument is invalid");
 ```
 
 For testing exceptions [ExceptionMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/ExceptionMatcher.java) will be used.
