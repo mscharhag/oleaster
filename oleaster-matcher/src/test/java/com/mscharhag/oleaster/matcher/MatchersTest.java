@@ -25,7 +25,7 @@ public class MatchersTest {{
 		it("ExceptionMatcher", () -> {
 			expect(() -> {
 				throw new NullPointerException("test");
-			}).toFailWith(NullPointerException.class);
+			}).toThrow(NullPointerException.class);
 		});
 
 		it("BooleanMatcher", () -> {
