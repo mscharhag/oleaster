@@ -11,4 +11,10 @@ public class Arguments {
 			throw new IllegalArgumentException(message);
 		}
 	}
+
+	public static void ensureTrue(boolean condition, String format, Object... args) {
+		if (!condition) {
+			throw new IllegalArgumentException(String.format(format, args));
+		}
+	}
 }

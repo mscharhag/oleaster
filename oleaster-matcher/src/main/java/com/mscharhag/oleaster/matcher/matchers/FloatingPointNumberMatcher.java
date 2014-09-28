@@ -1,5 +1,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
+import com.mscharhag.oleaster.matcher.util.Arguments;
+import com.mscharhag.oleaster.matcher.util.Assertions;
 import org.junit.Assert;
 
 /**
@@ -9,6 +11,10 @@ public class FloatingPointNumberMatcher {
 
 	private double value;
 
+	/**
+	 * Creates a new FloatingPointNumberMatcher to validate to passed {@code value}
+	 * @param value the value that should be validated
+	 */
 	public FloatingPointNumberMatcher(double value) {
 		this.value = value;
 	}
@@ -23,7 +29,7 @@ public class FloatingPointNumberMatcher {
 	 * @see #toBeCloseTo(double, double)
 	 */
 	public void toEqual(double other) {
-		Assert.assertTrue(this.value == other);
+		Assertions.failIfFalse(this.value == other, "Expected %s to equal %s", this.value, other);
 	}
 
 	/**
@@ -34,7 +40,8 @@ public class FloatingPointNumberMatcher {
 	 * @param delta the delta
 	 */
 	public void toBeCloseTo(double other, double delta) {
-		Assert.assertTrue(this.value >= other - delta && this.value <= other + delta);
+		boolean isCloseTo = this.value >= other - delta && this.value <= other + delta;
+		Assertions.failIfFalse(isCloseTo, "Expected %s to be close to %s with delta %s", this.value, other, delta);
 	}
 
 	/**
@@ -58,7 +65,7 @@ public class FloatingPointNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeGreaterThan(double other) {
-		Assert.assertTrue(this.value > other);
+		Assertions.failIfFalse(this.value > other, "Expected %s to be greater than %s", this.value, other);
 	}
 
 	/**
@@ -71,7 +78,7 @@ public class FloatingPointNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeSmallerThan(double other) {
-		Assert.assertTrue(this.value < other);
+		Assertions.failIfFalse(this.value < other, "Expected %s to be smaller than %s", this.value, other);
 	}
 
 	/**
@@ -87,9 +94,8 @@ public class FloatingPointNumberMatcher {
 	 * @throws java.lang.IllegalArgumentException if {@code lower} is not smaller than {@code upper}
 	 */
 	public void toBeBetween(double lower, double upper) {
-		if (lower >= upper) {
-			throw new IllegalArgumentException("upper has to be greater than lower");
-		}
-		Assert.assertTrue(this.value >= lower && this.value <= upper);
+		Arguments.ensureTrue(lower < upper, "upper has to be greater than lower");
+		boolean isBetween = this.value >= lower && this.value <= upper;
+		Assertions.failIfFalse(isBetween, "Expected %s to be between %s and %s", this.value, lower, upper);
 	}
 }

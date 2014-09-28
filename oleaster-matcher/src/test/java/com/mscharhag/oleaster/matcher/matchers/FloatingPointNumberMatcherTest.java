@@ -14,7 +14,8 @@ public class FloatingPointNumberMatcherTest {{
 
 		describe("when toEqual() is called", () -> {
 			it("fails if both values are not equal", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toEqual(2.5));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toEqual(2.5),
+						"Expected 1.5 to equal 2.5");
 			});
 
 			it("is ok if both values are equal", () -> {
@@ -24,11 +25,13 @@ public class FloatingPointNumberMatcherTest {{
 
 		describe("when toBeGreaterThan() is called", () -> {
 			it("fails if the passed value greater", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeGreaterThan(1.6));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeGreaterThan(1.6),
+						"Expected 1.5 to be greater than 1.6");
 			});
 
 			it("fails if both values are equal", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeGreaterThan(1.5));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeGreaterThan(1.5),
+						"Expected 1.5 to be greater than 1.5");
 			});
 
 			it("is ok if the passed value is smaller", () -> {
@@ -38,11 +41,13 @@ public class FloatingPointNumberMatcherTest {{
 
 		describe("when toBeSmallerThan() is called", () -> {
 			it("fails if the passed value smaller", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeSmallerThan(1.4));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeSmallerThan(1.4),
+						"Expected 1.5 to be smaller than 1.4");
 			});
 
 			it("fails if both values are equal", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeSmallerThan(1.5));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeSmallerThan(1.5),
+						"Expected 1.5 to be smaller than 1.5");
 			});
 
 			it("is ok if the passed value is greater", () -> {
@@ -62,7 +67,8 @@ public class FloatingPointNumberMatcherTest {{
 			});
 
 			it("fails if the value smaller than the lower bound", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeBetween(1.6, 1.7));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeBetween(1.6, 1.7),
+						"Expected 1.5 to be between 1.6 and 1.7");
 			});
 
 			it("is ok if the value is equal to the lower bound", () -> {
@@ -78,7 +84,8 @@ public class FloatingPointNumberMatcherTest {{
 			});
 
 			it("fails if the value is greater than the upper bound", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeBetween(1.3, 1.4));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.5).toBeBetween(1.3, 1.4),
+						"Expected 1.5 to be between 1.3 and 1.4");
 			});
 		});
 
@@ -92,7 +99,8 @@ public class FloatingPointNumberMatcherTest {{
 			});
 
 			it("fails if the the delta of 0.00001 is exceeded", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.4999).toBeCloseTo(1.5));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.4999).toBeCloseTo(1.5),
+						"Expected 1.4999 to be close to 1.5 with delta 1.0E-5");
 			});
 		});
 
@@ -102,7 +110,8 @@ public class FloatingPointNumberMatcherTest {{
 			});
 
 			it("fails if the the delta is exceeded", () -> {
-				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.551).toBeCloseTo(1.5, 0.05));
+				TestUtil.expectAssertionError(() -> new FloatingPointNumberMatcher(1.551).toBeCloseTo(1.5, 0.05),
+						"Expected 1.551 to be close to 1.5 with delta 0.05");
 			});
 		});
 
