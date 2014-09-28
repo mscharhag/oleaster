@@ -1,7 +1,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.matcher.util.Arguments;
-import com.mscharhag.oleaster.matcher.util.Assertions;
+import com.mscharhag.oleaster.matcher.util.Expectations;
 
 /**
  * Matcher class to validate if a code block throws an exception.
@@ -31,10 +31,10 @@ public class ExceptionMatcher {
 	public <T extends Exception> void toThrow(Class<T> expectedExceptionClass) {
 		Arguments.ensureNotNull(expectedExceptionClass, "expectedExceptionClass cannot be null");
 		String expectedExceptionName = expectedExceptionClass.getName();
-		Assertions.failIfNull(this.exception, "Expected code block to throw %s but it did not throw an exception",
+		Expectations.expectNotNull(this.exception, "Expected code block to throw %s but it did not throw an exception",
 				expectedExceptionName);
 		String exceptionName = this.exception.getClass().getName();
-		Assertions.failIfFalse(expectedExceptionClass.isInstance(this.exception),
+		Expectations.expectTrue(expectedExceptionClass.isInstance(this.exception),
 				"Expected code block to throw %s but it did throw %s", expectedExceptionName, exceptionName);
 	}
 
@@ -53,7 +53,7 @@ public class ExceptionMatcher {
 		Arguments.ensureNotNull(expectedMessage, "expectedMessage cannot be null");
 		this.toThrow(expectedExceptionClass);
 		String exceptionMessage = this.exception.getMessage();
-		Assertions.failIfFalse(expectedMessage.equals(exceptionMessage),
+		Expectations.expectTrue(expectedMessage.equals(exceptionMessage),
 				"Expected exception message '%s' but was '%s'", exceptionMessage, exceptionMessage);
 	}
 

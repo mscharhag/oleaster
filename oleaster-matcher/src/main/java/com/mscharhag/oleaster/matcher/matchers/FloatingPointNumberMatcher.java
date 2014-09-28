@@ -1,8 +1,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.matcher.util.Arguments;
-import com.mscharhag.oleaster.matcher.util.Assertions;
-import org.junit.Assert;
+import com.mscharhag.oleaster.matcher.util.Expectations;
 
 /**
  * Matcher class to validate floating point numbers numbers
@@ -29,7 +28,7 @@ public class FloatingPointNumberMatcher {
 	 * @see #toBeCloseTo(double, double)
 	 */
 	public void toEqual(double other) {
-		Assertions.failIfFalse(this.value == other, "Expected %s to equal %s", this.value, other);
+		Expectations.expectTrue(this.value == other, "Expected %s to equal %s", this.value, other);
 	}
 
 	/**
@@ -41,7 +40,7 @@ public class FloatingPointNumberMatcher {
 	 */
 	public void toBeCloseTo(double other, double delta) {
 		boolean isCloseTo = this.value >= other - delta && this.value <= other + delta;
-		Assertions.failIfFalse(isCloseTo, "Expected %s to be close to %s with delta %s", this.value, other, delta);
+		Expectations.expectTrue(isCloseTo, "Expected %s to be close to %s with delta %s", this.value, other, delta);
 	}
 
 	/**
@@ -65,7 +64,7 @@ public class FloatingPointNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeGreaterThan(double other) {
-		Assertions.failIfFalse(this.value > other, "Expected %s to be greater than %s", this.value, other);
+		Expectations.expectTrue(this.value > other, "Expected %s to be greater than %s", this.value, other);
 	}
 
 	/**
@@ -78,7 +77,7 @@ public class FloatingPointNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeSmallerThan(double other) {
-		Assertions.failIfFalse(this.value < other, "Expected %s to be smaller than %s", this.value, other);
+		Expectations.expectTrue(this.value < other, "Expected %s to be smaller than %s", this.value, other);
 	}
 
 	/**
@@ -96,6 +95,6 @@ public class FloatingPointNumberMatcher {
 	public void toBeBetween(double lower, double upper) {
 		Arguments.ensureTrue(lower < upper, "upper has to be greater than lower");
 		boolean isBetween = this.value >= lower && this.value <= upper;
-		Assertions.failIfFalse(isBetween, "Expected %s to be between %s and %s", this.value, lower, upper);
+		Expectations.expectTrue(isBetween, "Expected %s to be between %s and %s", this.value, lower, upper);
 	}
 }

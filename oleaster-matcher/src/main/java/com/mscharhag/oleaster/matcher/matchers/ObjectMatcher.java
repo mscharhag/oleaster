@@ -1,11 +1,14 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 
-import com.mscharhag.oleaster.matcher.util.Arguments;
+import com.mscharhag.oleaster.matcher.util.Expectations;
 
-import static com.mscharhag.oleaster.matcher.util.Assertions.failIfFalse;
-import static com.mscharhag.oleaster.matcher.util.Assertions.failIfNull;
+import static com.mscharhag.oleaster.matcher.util.Expectations.expectTrue;
+import static com.mscharhag.oleaster.matcher.util.Expectations.expectNotNull;
 
+/**
+ * Matcher class to validate Objects of type {@code T}.
+ */
 public class ObjectMatcher<T> {
 
 	private T value;
@@ -23,9 +26,9 @@ public class ObjectMatcher<T> {
 		if (this.value == null && other == null) {
 			return;
 		}
-		failIfNull(this.value, "Expected null to be equal '%s'", other);
-		failIfNull(other, "Expected '%s' to be equal null", this.value);
-		failIfFalse(this.value.equals(other), "Expected '%s' to be equal '%s'", this.value, other);
+		expectNotNull(this.value, "Expected null to be equal '%s'", other);
+		expectNotNull(other, "Expected '%s' to be equal null", this.value);
+		expectTrue(this.value.equals(other), "Expected '%s' to be equal '%s'", this.value, other);
 	}
 
 	/**
@@ -33,7 +36,7 @@ public class ObjectMatcher<T> {
 	 * <p>This method throws an {@code AssertionError} if the stored value is {@code null}.
 	 */
 	public void toBeNull() {
-		failIfFalse(this.value == null, "Expected '%s' to be null", this.value);
+		expectTrue(this.value == null, "Expected '%s' to be null", this.value);
 	}
 
 	/**
@@ -41,7 +44,7 @@ public class ObjectMatcher<T> {
 	 * <p>This method throws an {@code AssertionError} if the stored value is not {@code null}.
 	 */
 	public void toBeNotNull() {
-		failIfFalse(this.value != null, "Expected null to be not null");
+		expectTrue(this.value != null, "Expected null to be not null");
 	}
 
 	protected T getValue() {

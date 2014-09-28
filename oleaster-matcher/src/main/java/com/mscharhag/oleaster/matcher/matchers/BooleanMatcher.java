@@ -1,6 +1,6 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
-import com.mscharhag.oleaster.matcher.util.Assertions;
+import com.mscharhag.oleaster.matcher.util.Expectations;
 
 /**
  * Matcher class to validate boolean values
@@ -23,7 +23,7 @@ public class BooleanMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toEqual(boolean other) {
-		Assertions.failIfFalse(this.value == other, "Expected %s to equal %s", this.value, other);
+		Expectations.expectTrue(this.value == other, "Expected %s to equal %s", this.value, other);
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class BooleanMatcher {
 	 * <p>This method throws an {@code AssertionError} if the stored value is {@code false}.
 	 */
 	public void toBeTrue() {
-		Assertions.failIfFalse(this.value, "Expected %s to be true", this.value);
+		Expectations.expectTrue(this.value, "Expected %s to be true", this.value);
 	}
 
 	/**
@@ -39,6 +39,6 @@ public class BooleanMatcher {
 	 * <p>This method throws an {@code AssertionError} if the stored value is {@code true}.
 	 */
 	public void toBeFalse() {
-		Assertions.failIfFalse(!this.value, "Expected %s to be false", this.value);
+		Expectations.expectTrue(!this.value, "Expected %s to be false", this.value);
 	}
 }

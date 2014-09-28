@@ -14,7 +14,7 @@ public class IntegerNumberMatcherTest {{
 
 		describe("when toEqual() is called", () -> {
 			it("fails if both values are not equal", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toEqual(2));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toEqual(2), "Expected 1 to equal 2");
 			});
 
 			it("is ok if both values are equal", () -> {
@@ -24,11 +24,13 @@ public class IntegerNumberMatcherTest {{
 
 		describe("when toBeGreaterThan() is called", () -> {
 			it("fails if the passed value greater", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeGreaterThan(2));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeGreaterThan(2),
+						"Expected 1 to be greater than 2");
 			});
 
 			it("fails if both values are equal", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeGreaterThan(1));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeGreaterThan(1),
+						"Expected 1 to be greater than 1");
 			});
 
 			it("is ok if the passed value is smaller", () -> {
@@ -38,11 +40,13 @@ public class IntegerNumberMatcherTest {{
 
 		describe("when toBeSmallerThan() is called", () -> {
 			it("fails if the passed value smaller", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeSmallerThan(0));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeSmallerThan(0),
+						"Expected 1 to be smaller than 0");
 			});
 
 			it("fails if both values are equal", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeSmallerThan(1));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeSmallerThan(1),
+						"Expected 1 to be smaller than 1");
 			});
 
 			it("is ok if the passed value is greater", () -> {
@@ -62,7 +66,8 @@ public class IntegerNumberMatcherTest {{
 			});
 
 			it("fails if the value smaller than the lower bound", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeBetween(2, 3));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(1).toBeBetween(2, 3),
+						"Expected 1 to be between 2 and 3");
 			});
 
 			it("is ok if the value is equal to the lower bound", () -> {
@@ -78,7 +83,8 @@ public class IntegerNumberMatcherTest {{
 			});
 
 			it("fails if the value is greater than the upper bound", () -> {
-				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(2).toBeBetween(0, 1));
+				TestUtil.expectAssertionError(() -> new IntegerNumberMatcher(2).toBeBetween(0, 1),
+						"Expected 2 to be between 0 and 1");
 			});
 		});
 

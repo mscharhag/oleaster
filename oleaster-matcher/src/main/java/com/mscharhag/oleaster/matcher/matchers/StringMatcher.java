@@ -1,7 +1,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.matcher.util.Arguments;
-import static com.mscharhag.oleaster.matcher.util.Assertions.*;
+import static com.mscharhag.oleaster.matcher.util.Expectations.*;
 
 import java.util.regex.Pattern;
 
@@ -27,8 +27,8 @@ public class StringMatcher extends ObjectMatcher<String> {
 	 */
 	public void toMatch(Pattern pattern) {
 		Arguments.ensureNotNull(pattern, "pattern cannot be null");
-		failIfNull(this.getValue(), "Expected null to match '%s'", pattern.pattern());
-		failIfFalse(pattern.matcher(this.getValue()).matches(),
+		expectNotNull(this.getValue(), "Expected null to match '%s'", pattern.pattern());
+		expectTrue(pattern.matcher(this.getValue()).matches(),
 				"Expected '%s' to match '%s'", this.getValue(), pattern.pattern());
 	}
 
@@ -55,8 +55,8 @@ public class StringMatcher extends ObjectMatcher<String> {
 	 */
 	public void toStartWith(String start) {
 		Arguments.ensureNotNull(start, "start cannot be null");
-		failIfNull(this.getValue(), "Expected null to start with '%s'", start);
-		failIfFalse(this.getValue().startsWith(start), "Expected '%s' to start with '%s'", this.getValue(), start);
+		expectNotNull(this.getValue(), "Expected null to start with '%s'", start);
+		expectTrue(this.getValue().startsWith(start), "Expected '%s' to start with '%s'", this.getValue(), start);
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class StringMatcher extends ObjectMatcher<String> {
 	 */
 	public void toEndWith(String end) {
 		Arguments.ensureNotNull(end, "end cannot be null");
-		failIfNull(this.getValue(), "Expected null to end with '%s'", end);
-		failIfFalse(this.getValue().endsWith(end), "Expected '%s' to end with '%s'", this.getValue(), end);
+		expectNotNull(this.getValue(), "Expected null to end with '%s'", end);
+		expectTrue(this.getValue().endsWith(end), "Expected '%s' to end with '%s'", this.getValue(), end);
 	}
 
 
@@ -88,8 +88,8 @@ public class StringMatcher extends ObjectMatcher<String> {
 	 */
 	public void toContain(String substr) {
 		Arguments.ensureNotNull(substr, "substr cannot be null");
-		failIfNull(this.getValue(), "Expected null to contain '%s'", substr);
-		failIfFalse(this.getValue().contains(substr), "Expected '%s' to contain '%s'", this.getValue(), substr);
+		expectNotNull(this.getValue(), "Expected null to contain '%s'", substr);
+		expectTrue(this.getValue().contains(substr), "Expected '%s' to contain '%s'", this.getValue(), substr);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
-import org.junit.Assert;
+import com.mscharhag.oleaster.matcher.util.Arguments;
+import com.mscharhag.oleaster.matcher.util.Expectations;
 
 /**
  * Matcher class to validate integer numbers
@@ -24,7 +25,7 @@ public class IntegerNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toEqual(long other) {
-		Assert.assertEquals(other, this.value);
+		Expectations.expectTrue(this.value == other, "Expected %s to equal %s", this.value, other);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class IntegerNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeGreaterThan(long other) {
-		Assert.assertTrue(this.value > other);
+		Expectations.expectTrue(this.value > other, "Expected %s to be greater than %s", this.value, other);
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class IntegerNumberMatcher {
 	 * @param other the value to compare with
 	 */
 	public void toBeSmallerThan(long other) {
-		Assert.assertTrue(this.value < other);
+		Expectations.expectTrue(this.value < other, "Expected %s to be smaller than %s", this.value, other);
 	}
 
 	/**
@@ -66,10 +67,9 @@ public class IntegerNumberMatcher {
 	 * @throws java.lang.IllegalArgumentException if {@code lower} is not smaller than {@code upper}
 	 */
 	public void toBeBetween(long lower, long upper) {
-		if (lower >= upper) {
-			throw new IllegalArgumentException("upper has to be greater than lower");
-		}
-		Assert.assertTrue(this.value >= lower && this.value <= upper);
+		Arguments.ensureTrue(lower < upper, "upper has to be greater than lower");
+		boolean isBetween = this.value >= lower && this.value <= upper;
+		Expectations.expectTrue(isBetween, "Expected %s to be between %s and %s", this.value, lower, upper);
 	}
 
 }

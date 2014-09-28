@@ -1,7 +1,6 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.matcher.TestUtil;
-import com.mscharhag.oleaster.matcher.matchers.FloatingPointNumberMatcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
