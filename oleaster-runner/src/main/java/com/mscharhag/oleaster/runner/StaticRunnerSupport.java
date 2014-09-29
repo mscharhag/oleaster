@@ -43,6 +43,7 @@ public class StaticRunnerSupport {
 	 * @param block A code block that represents the test suite
 	 */
 	public static void describe(String text, Invokable block) {
+		failIfNoSuiteBuilderAvailable("describe");
 		suiteBuilder.describe(text, block);
 	}
 
@@ -61,6 +62,7 @@ public class StaticRunnerSupport {
 	 * @param block A code block that implements the validation
 	 */
 	public static void it(String text, Invokable block) {
+		failIfNoSuiteBuilderAvailable("it");
 		suiteBuilder.it(text, block);
 	}
 
@@ -70,6 +72,7 @@ public class StaticRunnerSupport {
 	 * @param block A code block that is executed before every spec execution
 	 */
 	public static void beforeEach(Invokable block) {
+		failIfNoSuiteBuilderAvailable("beforeEach");
 		suiteBuilder.beforeEach(block);
 	}
 
@@ -78,6 +81,15 @@ public class StaticRunnerSupport {
 	 * @param block A code block that is executed after every spec execution
 	 */
 	public static void afterEach(Invokable block) {
+		failIfNoSuiteBuilderAvailable("afterEach");
 		suiteBuilder.afterEach(block);
+	}
+
+
+	private static void failIfNoSuiteBuilderAvailable(String methodName) {
+		if (suiteBuilder == null) {
+			throw new IllegalStateException(String.format("No suiteBuilder available, " +
+					"maybe you called %s() in a location where it is not intended to be called?", methodName));
+		}
 	}
 }
