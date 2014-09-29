@@ -42,8 +42,8 @@ To improve readability it is recommended to statically import `Matchers.*`
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 ```
 
-**Note:** You can find the source of all examples shown here in the `oleaster-examples` module in 
-[MatcherExamplesTest](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/MatcherExamplesTest.java)
+**Note:** You can find the source of all examples shown here in the `oleaster-examples` module  
+(see: [MatcherExamplesTest.java](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/MatcherExamplesTest.java))
 
 ## Primitive types
 
