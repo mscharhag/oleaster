@@ -24,7 +24,7 @@ public class OleasterRunnerTest {
 	private Suite suite;
 	private List<Spec> specs;
 
-	public static class TestClass {{
+	private static class TestClass {{
 		describe("outer describe", () -> {
 			describe("inner describe", () -> {
 				it("inner it", block.apply("inner it"));
