@@ -217,7 +217,8 @@ public class AudioPlayerExampleTest {
 	});
 }}
 ```
-You can find the source for this example in the `oleaster-examples` module (see: [AudioPlayerExampleTest.java](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/AudioPlayerExampleTest.java).
+You can find the source for this example in the `oleaster-examples` module (see: [AudioPlayerExampleTest.java](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/AudioPlayerExampleTest.java)).
+
 For more examples you can have a look at Oleaster tests which are written with Oleaster.
 See:
 
