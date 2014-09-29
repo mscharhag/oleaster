@@ -8,10 +8,14 @@ import java.util.regex.Pattern;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 
+/**
+ * This test shows how Oleaster Matchers can be used.
+ * These examples are also shown on the Oleaster Matcher documentation page
+ */
 @RunWith(OleasterRunner.class)
-public class MatcherDocumentationExamplesTest {{
+public class MatcherExamplesTest {{
 
-	it("ensures introduction examples are correct", () -> {
+	it("gives a quick overview", () -> {
 
 		// same as JUnit's assertEquals(40 + 2, 42)
 		expect(40 + 2).toEqual(42);
@@ -26,7 +30,7 @@ public class MatcherDocumentationExamplesTest {{
 		}).toThrow(IllegalArgumentException.class);
 	});
 
-	it("ensures number examples are correct", () -> {
+	it("shows how numbers can be validated", () -> {
 		int value = 42;
 
 		// check for exact value
@@ -45,7 +49,7 @@ public class MatcherDocumentationExamplesTest {{
 		expect(42.0000001).toBeCloseTo(42, 0.000001);
 	});
 
-	it("ensures boolean examples are correct", () -> {
+	it("shows how boolean values can be validated", () -> {
 		boolean value = true;
 
 		// check for a given parameter
@@ -59,7 +63,7 @@ public class MatcherDocumentationExamplesTest {{
 		expect(value).toBeFalse();
 	});
 
-	it("ensures object examples are correct", () -> {
+	it("shows how Objects can be validated", () -> {
 		Person person = new Person("John", "Smith");
 
 		// check for equality, delegates to Person.equals()
@@ -73,7 +77,7 @@ public class MatcherDocumentationExamplesTest {{
 		expect(person).toBeNull();
 	});
 
-	it("ensures String examples are correct", () -> {
+	it("shows how Strings can be validated", () -> {
 		// check for exact value
 		expect("foo").toEqual("foo");
 
@@ -89,7 +93,7 @@ public class MatcherDocumentationExamplesTest {{
 		expect("foobar").toMatch("fo+\\w*");
 	});
 
-	it("ensures Exception examples are correct", () -> {
+	it("shows how Exceptions can be tested", () -> {
 		// check if an exception is thrown
 		expect(() -> {
 			// code that throws IllegalArgumentException
