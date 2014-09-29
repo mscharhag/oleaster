@@ -141,8 +141,8 @@ describe("a suite", () -> {
 });
 ```
 
-## `beforeEach()` and `afterEach()`
-With `beforeEach()` and `afterEach()` it is possible to run code before and after every spec:
+## Running code before/after specs
+With `beforeEach()` and `afterEach()` it is possible to run code before and after a spec is executed:
 ```java
 describe("beforeEach/afterEach example", () -> {
 	beforeEach(() -> {
@@ -160,7 +160,7 @@ will run first.
 -java effectively final
 ## Assertions
 
-Validating the result of a test can be done in various
+Validating the result of a test can be done in various ways.
 Oleaster Matchers provide Jasmine-like Matchers for checking expected test results. However it is also possible to use
 standard JUnit assertions or additional libraries like [Hamcrest](https://github.com/hamcrest/JavaHamcrest).
 ```java
@@ -220,9 +220,10 @@ public class AudioPlayerExampleTest {
 ```
 You can find the source for this example in the `oleaster-examples` module.
 For more examples you can have a look at Oleaster tests which are written with Oleaster.
+See:
 
-* Oleaster Runner tests
-* Oleaster Matcher tests
+* [Oleaster Runner tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner)
+* [Oleaster Matcher tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher/src/test/java/com/mscharhag/oleaster/matcher/matchers)
 
 ## Licence
 
