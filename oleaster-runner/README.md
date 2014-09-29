@@ -157,7 +157,6 @@ describe("beforeEach/afterEach example", () -> {
 If `beforeEach()` or `afterEach()` is used inside nested suites, `beforeEach()`/`afterEach()` blocks of the outer suite
 will run first.
 
--java effectively final
 ## Assertions
 
 Validating the result of a test can be done in various ways.
@@ -218,7 +217,7 @@ public class AudioPlayerExampleTest {
 	});
 }}
 ```
-You can find the source for this example in the `oleaster-examples` module.
+You can find the source for this example in the `oleaster-examples` module (see: [AudioPlayerExampleTest.java](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/AudioPlayerExampleTest.java).
 For more examples you can have a look at Oleaster tests which are written with Oleaster.
 See:
 
