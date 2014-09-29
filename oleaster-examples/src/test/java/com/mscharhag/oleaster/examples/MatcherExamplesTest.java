@@ -10,7 +10,8 @@ import static com.mscharhag.oleaster.matcher.Matchers.*;
 
 /**
  * This test shows how Oleaster Matchers can be used.
- * These examples are also shown on the Oleaster Matcher documentation page
+ * These examples are also shown on the Oleaster Matcher documentation page.
+ * If changes in this file are made, the documentation needs be updated.
  */
 @RunWith(OleasterRunner.class)
 public class MatcherExamplesTest {{

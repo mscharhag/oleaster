@@ -55,7 +55,7 @@ public class Matchers {
 		return new StringMatcher(value);
 	}
 
-	public static ObjectMatcher expect(Object value) {
-		return new ObjectMatcher(value);
+	public static ObjectMatcher<Object> expect(Object value) {
+		return new ObjectMatcher<>(value);
 	}
 }
