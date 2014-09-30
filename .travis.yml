@@ -2,5 +2,7 @@ language: java
 script: mvn clean test
 after_failure:
   - "cat ./target/surefire-reports/*.xml"
+after_success:
+  - mvn clean test jacoco:report coveralls:jacoco
 jdk:
   - oraclejdk8
