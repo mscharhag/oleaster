@@ -9,7 +9,7 @@ import static com.mscharhag.oleaster.matcher.Matchers.*;
 /**
  * This is an Oleaster example test.
  * These test is shown in the Oleaster Runner documentation page.
- * If changes in this test are made, the documentation needs be updated.
+ * If this test is updated, the documentation should be updated too.
  */
 @RunWith(OleasterRunner.class)
 public class AudioPlayerExampleTest {
