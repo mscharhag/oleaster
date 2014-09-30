@@ -80,6 +80,11 @@ public class ExceptionMatcher {
 		}
 	}
 
+	/**
+	 * {@code CodeBlock} represents the piece of code that should throw an exception.
+	 * <p>{@code CodeBlock} is a functional interface that is typically implemented using
+	 * Java 8 Lambda expressions. Its single method {@code run()} can throw checked exceptions.
+	 */
 	public static interface CodeBlock {
 		public void run() throws Exception;
 	}

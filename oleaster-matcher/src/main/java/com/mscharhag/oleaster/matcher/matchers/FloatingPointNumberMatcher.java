@@ -26,7 +26,7 @@ public class FloatingPointNumberMatcher {
 	private double value;
 
 	/**
-	 * Creates a new FloatingPointNumberMatcher to validate to passed {@code value}
+	 * Creates a new {@code FloatingPointNumberMatcher} to validate the passed {@code value}.
 	 * @param value the value that should be validated
 	 */
 	public FloatingPointNumberMatcher(double value) {

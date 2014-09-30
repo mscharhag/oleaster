@@ -15,6 +15,9 @@
 */
 package com.mscharhag.oleaster.matcher.util;
 
+/**
+ * Internal Utility class for validating arguments
+ */
 public class Arguments {
 
 	public static void ensureNotNull(Object value, String format, Object... args) {
