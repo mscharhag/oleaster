@@ -34,7 +34,7 @@ The [Oleaster JUnit Runner](https://github.com/mscharhag/oleaster/tree/master/ol
 
 [Source of the AudioPlayer example](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/AudioPlayerExampleTest.java) from the Oleaster Runner documentation.
 
-Oleaster tests are written with Oleaster (see: [Oleaster JUnit Runner Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) and [Oleaster Matcher Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher/src/test/java/com/mscharhag/oleaster/matcher/matchers).
+Oleaster tests are written with Oleaster (see: [Oleaster JUnit Runner Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) and [Oleaster Matcher Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher/src/test/java/com/mscharhag/oleaster/matcher/matchers)).
 
 Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
 
@@ -46,14 +46,14 @@ Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
 	<dependency>
     	<groupId>com.mscharhag.oleaster</groupId>
     	<artifactId>oleaster-matcher</artifactId>
-    	<version>0.1.0-SNAPSHOT</version>
+    	<version>0.1.0</version>
     </dependency>
     
 	<!-- Oleaster JUnit runner -->
 	<dependency>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster-runner</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</dependency>
 
 	<!-- Of course a JUnit runner can only be used with JUnit -->

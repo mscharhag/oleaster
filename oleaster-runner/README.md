@@ -26,7 +26,7 @@ If you are using Maven you just have to add the following dependencies to your `
 	<dependency>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster-runner</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
+		<version>0.1.0</version>
 	</dependency>
 
 	<!-- Oleaster requires JUnit -->
