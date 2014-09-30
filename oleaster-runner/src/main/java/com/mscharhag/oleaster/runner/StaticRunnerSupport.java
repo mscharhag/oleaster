@@ -17,6 +17,12 @@ package com.mscharhag.oleaster.runner;
 
 import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
+/**
+ * {@code StaticRunnerSupport} gives access to a {@link com.mscharhag.oleaster.runner.suite.SuiteBuilder}
+ * using static methods.
+ * <p>Using {@code StaticRunnerSupport} is the preferred way to build a test suite.
+ * For fluent access it is recommended to statically import the methods of this class.
+ */
 public class StaticRunnerSupport {
 
 	private StaticRunnerSupport() {
@@ -31,9 +37,13 @@ public class StaticRunnerSupport {
 
 	/**
 	 * Creates a new test suite.
-	 * Test suites can contain specs (defined by using {@code it()} and
-	 * {@code beforeEach()}/{@code afterEach()} handlers.
-	 * For example:
+	 * <p>Test suites can contain:
+	 * <ul>
+	 *     	<li>specs (defined by using {@code it()}</li>
+	 *     	<li>other suites (defined by nesting {@code describe()} calls)</li>
+	 * 		<li>{@code beforeEach()} and {@code afterEach()} handlers.</li>
+	 * </ul>
+	 * <p>For example:
 	 * <pre>{@code
 	 * describe("my test suite", () -> {
 	 *     ...
@@ -50,9 +60,8 @@ public class StaticRunnerSupport {
 
 	/**
 	 * Create a new spec.
-	 * Specs are used to validate a specific test condition. Specs always need to be enclosed by a test suite
-	 * (see {@code describe()}).
-	 * For example:
+	 * <p>Specs are used to validate a specific test condition.
+	 * <p>For example:
 	 * <pre>{@code
 	 * it("returns a list containing one item", () -> {
 	 *   assertEquals(1, getList().size());
@@ -69,6 +78,12 @@ public class StaticRunnerSupport {
 
 	/**
 	 * Creates a new {@code beforeEach} handler for the surrounding test suite.
+	 * <p>For example:
+	 * <pre>{@code
+	 * beforeEach(() -> {
+	 *   // this code runs before each spec
+	 * });
+	 * }</pre>
 	 * @param block A code block that is executed before every spec execution
 	 */
 	public static void beforeEach(Invokable block) {
@@ -78,6 +93,12 @@ public class StaticRunnerSupport {
 
 	/**
 	 * Creates a new {@code afterEach} handler for the surrounding test suite.
+	 * <p>For example:
+	 * <pre>{@code
+	 * afterEach(() -> {
+	 *   // this code runs after each spec
+	 * });
+	 * }</pre>
 	 * @param block A code block that is executed after every spec execution
 	 */
 	public static void afterEach(Invokable block) {

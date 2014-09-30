@@ -30,6 +30,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * OleasterRunner is JUnit runner that lets you write JUnit tests
+ * like you write Jasmine tests (a popular Javascript testing framework).
+ * <p>An Oleaster test looks like this:
+ * <pre>
+ * 	{@literal @}RunWith(OleasterRunner.class)
+ * 	 public class RunnerIntroductionTest {{
+ *		describe("A suite", () -&gt; {
+ *			it("contains a spec with an expectation", () -&gt; {
+ *				// test code
+ *			});
+ *		});
+ *	}}
+ * </pre>
+ */
 public class OleasterRunner extends ParentRunner<Spec> {
 
 	public OleasterRunner(Class<?> testClass) throws InitializationError {
