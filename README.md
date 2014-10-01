@@ -20,7 +20,7 @@ Oleaster consists out of two independent libraries:
 
 The [Oleaster JUnit Runner](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner) gives you the option
  to write JUnit tests in the format shown above. Java 8 Lambda expressions are used to structure a test in suites
- and specifications.``
+ and specifications.
  
 [Oleaster-Matcher](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher)
  provides Jasmine-like Matchers (`expect(..).toEqual(..)`) to validate test results. These Matchers can be used
