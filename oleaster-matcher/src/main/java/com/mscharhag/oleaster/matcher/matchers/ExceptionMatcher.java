@@ -68,8 +68,8 @@ public class ExceptionMatcher {
 		Arguments.ensureNotNull(expectedMessage, "expectedMessage cannot be null");
 		this.toThrow(expectedExceptionClass);
 		String exceptionMessage = this.exception.getMessage();
-		Expectations.expectTrue(expectedMessage.equals(exceptionMessage),
-				"Expected exception message '%s' but was '%s'", exceptionMessage, exceptionMessage);
+        Expectations.expectTrue(expectedMessage.equals(exceptionMessage),
+                "Expected exception message '%s' but was '%s'", expectedMessage, exceptionMessage);
 	}
 
 	private void runCodeBlock(CodeBlock block) {
