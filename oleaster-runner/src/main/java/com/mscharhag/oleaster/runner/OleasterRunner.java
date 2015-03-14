@@ -78,12 +78,6 @@ public class OleasterRunner extends ParentRunner<Spec> {
 	}
 
 
-	@Override
-	public Description getDescription() {
-		return Description.createSuiteDescription(this.getTestClass().getJavaClass().getName());
-	}
-
-
 	protected SuiteBuilder createSuiteBuilder() {
 		return new StaticSupportingSuiteBuilder();
 	}

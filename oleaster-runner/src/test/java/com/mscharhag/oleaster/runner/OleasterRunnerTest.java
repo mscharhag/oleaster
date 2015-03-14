@@ -52,6 +52,11 @@ public class OleasterRunnerTest {
 			runner = new OleasterRunner(TestClass.class);
 		});
 
+        it("adds the filtered children to the suite", () -> {
+            int numberOfChildren = runner.getDescription().getChildren().size();
+            assertEquals(2, numberOfChildren);
+        });
+
 		describe("when specs are obtained from the test class using getChildren()", () -> {
 
 			beforeEach(() -> {

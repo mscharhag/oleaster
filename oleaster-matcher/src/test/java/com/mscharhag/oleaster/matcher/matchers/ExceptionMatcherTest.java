@@ -32,7 +32,8 @@ public class ExceptionMatcherTest {
 			});
 
 			it("fails if the exception message is not equal to the expected message", () -> {
-				TestUtil.expectAssertionError(() -> matcher.toThrow(IllegalArgumentException.class, "foo"));
+                String expectedMessage = "Expected exception message 'foo' but was 'test exception'";
+                TestUtil.expectAssertionError(() -> matcher.toThrow(IllegalArgumentException.class, "foo"), expectedMessage);
 			});
 
 			it("is ok if it is checked for a super class of the thrown exception", () -> {
