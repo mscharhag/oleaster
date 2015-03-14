@@ -19,13 +19,13 @@
 		<dependency>
 			<groupId>com.mscharhag.oleaster</groupId>
 			<artifactId>oleaster-matcher</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.1.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.mscharhag.oleaster</groupId>
 			<artifactId>oleaster-runner</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.1.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
