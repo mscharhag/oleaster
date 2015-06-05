@@ -16,6 +16,9 @@
 package com.mscharhag.oleaster.matcher;
 
 import com.mscharhag.oleaster.matcher.matchers.*;
+import com.mscharhag.oleaster.matcher.matchers.datetime.DateMatcher;
+
+import java.util.Date;
 
 /**
  * {@code Matchers} provides a set of static {@code expect()} methods that can (and should) be used to
@@ -197,5 +200,10 @@ public class Matchers {
 	 */
 	public static ObjectMatcher<Object> expect(Object value) {
 		return new ObjectMatcher<>(value);
+	}
+
+
+	public static DateMatcher expect(Date date) {
+		return new DateMatcher(date);
 	}
 }

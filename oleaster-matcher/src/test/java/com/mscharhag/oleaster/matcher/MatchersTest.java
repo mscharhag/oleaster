@@ -3,6 +3,8 @@ package com.mscharhag.oleaster.matcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
+import java.util.Date;
+
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static com.mscharhag.oleaster.matcher.Matchers.*;
 
@@ -34,6 +36,10 @@ public class MatchersTest {{
 
 		it("StringMatcher", () -> {
 			expect("foo").toEndWith("oo");
+		});
+
+		it("Date", () -> {
+			expect(new Date()).toBeCloseTo(new Date(), 5);
 		});
 
 	});
