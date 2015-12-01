@@ -31,6 +31,7 @@ public class SuiteBuilderTest {
 		it("empties existing collections before an evaluation", () -> {
 			// fill collections
 			suiteBuilder.describe("test suite", invokable);
+			suiteBuilder.before(invokable);
 			suiteBuilder.beforeEach(invokable);
 			suiteBuilder.afterEach(invokable);
 			suiteBuilder.it("test spec", invokable);
@@ -82,6 +83,16 @@ public class SuiteBuilderTest {
 
 			it("returns the newly added handler", () -> {
 				assertEquals(Arrays.asList(invokable), suiteBuilder.getBeforeEachHandlers());
+			});
+		});
+
+		describe("when a before handler is added", () -> {
+			beforeEach(() -> {
+				suiteBuilder.before(invokable);
+			});
+
+			it("returns the newly added handler", () -> {
+				assertEquals(Arrays.asList(invokable), suiteBuilder.getBeforeHandlers());
 			});
 		});
 
