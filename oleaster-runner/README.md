@@ -157,22 +157,6 @@ describe("beforeEach/afterEach example", () -> {
 If `beforeEach()` or `afterEach()` is used inside nested suites, `beforeEach()`/`afterEach()` blocks of the outer suite
 will run first.
 
-## Running code before/after suites
-With `before()` and `after()` it is possible to run code once at first or at last within a suite respectively:
-```java
-describe("before/after example", () -> {
-	before(() -> {
-		// runs before first spec in this suite
-	});
-
-	after(() -> {
-		// runs after last spec in this suite
-	});
-});
-```
-If `before()` or `after()` is used inside nested suites, `before()`/`after()` blocks of the outer suite
-will run first.
-
 ## Assertions
 
 Validating the result of a test can be done in various ways.

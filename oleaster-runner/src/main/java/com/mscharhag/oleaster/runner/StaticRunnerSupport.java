@@ -92,21 +92,6 @@ public class StaticRunnerSupport {
 	}
 
 	/**
-	 * Creates a new {@code before} handler for the surrounding test suite.
-	 * <p>For example:
-	 * <pre>{@code
-	 * before(() -> {
-	 *   // this code runs once before first spec in suite
-	 * });
-	 * }</pre>
-	 * @param block A code block that is executed once before first spec in suite
-	 */
-	public static void before(Invokable block) {
-		failIfNoSuiteBuilderAvailable("before");
-		suiteBuilder.before(block);
-	}
-
-	/**
 	 * Creates a new {@code afterEach} handler for the surrounding test suite.
 	 * <p>For example:
 	 * <pre>{@code

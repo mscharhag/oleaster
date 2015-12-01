@@ -28,7 +28,6 @@ public class Suite {
 	private List<Suite> suites = new ArrayList<>();
 	private List<Spec> specs = new ArrayList<>();
 	private List<Invokable> beforeEachHandlers = new ArrayList<>();
-	private List<Invokable> beforeHandlers = new ArrayList<>();
 	private List<Invokable> afterEachHandlers = new ArrayList<>();
 
 
@@ -49,14 +48,6 @@ public class Suite {
 		this.beforeEachHandlers.addAll(calls);
 	}
 
-	public void addBeforeHandler(Invokable block) {
-		this.beforeHandlers.add(block);
-	}
-
-	public void addBeforeHandlers(List<Invokable> calls) {
-		this.beforeHandlers.addAll(calls);
-	}
-
 	public void addAfterEachHandlers(List<Invokable> calls) {
 		this.afterEachHandlers.addAll(calls);
 	}
@@ -75,10 +66,6 @@ public class Suite {
 
 	public List<Invokable> getBeforeEachHandlers() {
 		return this.beforeEachHandlers;
-	}
-
-	public List<Invokable> getBeforeHandlers() {
-		return this.beforeHandlers;
 	}
 
 	public List<Invokable> getAfterEachHandlers() {

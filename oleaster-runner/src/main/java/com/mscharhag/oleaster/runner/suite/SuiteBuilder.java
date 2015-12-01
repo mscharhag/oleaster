@@ -28,7 +28,6 @@ public class SuiteBuilder {
 	private Map<String, Invokable> suiteDefinitions;
 	private Map<String, Invokable> specDefinitions;
 	private List<Invokable> beforeEachHandlers;
-	private List<Invokable> beforeHandlers;
 	private List<Invokable> afterEachHandlers;
 
 	public SuiteBuilder() {
@@ -38,7 +37,6 @@ public class SuiteBuilder {
 	private void prepare() {
 		this.suiteDefinitions = new LinkedHashMap<>();
 		this.specDefinitions = new LinkedHashMap<>();
-		this.beforeHandlers = new ArrayList<>();
 		this.beforeEachHandlers = new ArrayList<>();
 		this.afterEachHandlers = new ArrayList<>();
 	}
@@ -69,10 +67,6 @@ public class SuiteBuilder {
 		this.beforeEachHandlers.add(block);
 	}
 
-	public void before(Invokable block) {
-		this.beforeHandlers.add(block);
-	}
-
 	public void afterEach(Invokable block) {
 		this.afterEachHandlers.add(block);
 	}
@@ -87,10 +81,6 @@ public class SuiteBuilder {
 
 	public List<Invokable> getBeforeEachHandlers() {
 		return beforeEachHandlers;
-	}
-
-	public List<Invokable> getBeforeHandlers() {
-		return beforeHandlers;
 	}
 
 	public List<Invokable> getAfterEachHandlers() {

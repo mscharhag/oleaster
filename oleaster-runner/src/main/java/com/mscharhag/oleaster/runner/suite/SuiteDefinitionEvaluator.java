@@ -40,7 +40,6 @@ public class SuiteDefinitionEvaluator {
 	private Suite createSuite(SuiteDefinition suiteDefinition, SuiteBuilder suiteBuilder) {
 		Suite suite = new Suite(suiteDefinition.getParent(), suiteDefinition.getDescription());
 
-		suite.addBeforeHandlers(suiteBuilder.getBeforeHandlers());
 		suite.addBeforeEachHandlers(suiteBuilder.getBeforeEachHandlers());
 		suite.addAfterEachHandlers(suiteBuilder.getAfterEachHandlers());
 

@@ -86,40 +86,34 @@ public class OleasterRunnerTest {
 				suite = new Suite(null, "suite");
 			});
 
-			it("executes before handlers once before the first spec is executed", () -> {
-				suite.addBeforeHandler(block.apply("before"));
+			it("executes beforeEach handlers before the spec is executed", () -> {
+				suite.addBeforeEachHandler(block.apply("before"));
 				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
 				assertEquals(Arrays.asList("before", "spec"), calls);
 			});
 
-			it("executes beforeEach handlers before the spec is executed", () -> {
-				suite.addBeforeEachHandler(block.apply("beforeEach"));
-				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
-				assertEquals(Arrays.asList("beforeEach", "spec"), calls);
-			});
-
 			it("executes afterEach handlers after the spec is executed", () -> {
-				suite.addAfterEachHandler(block.apply("afterEach"));
+				suite.addAfterEachHandler(block.apply("after"));
 				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
-				assertEquals(Arrays.asList("spec", "afterEach"), calls);
+				assertEquals(Arrays.asList("spec", "after"), calls);
 			});
 
 			it("executes outer beforeEach handlers before inner ones", () -> {
-				suite.addBeforeEachHandler(block.apply("outerBeforeEach"));
+				suite.addBeforeEachHandler(block.apply("outer"));
 				Suite child = new Suite(suite, "child");
-				child.addBeforeEachHandler(block.apply("innerBeforeEach"));
+				child.addBeforeEachHandler(block.apply("inner"));
 				runner.runChild(new Spec(child, "spec", () -> {
 				}), new RunNotifier());
-				assertEquals(Arrays.asList("outerBeforeEach", "innerBeforeEach"), calls);
+				assertEquals(Arrays.asList("outer", "inner"), calls);
 			});
 
 			it("executes inner afterEach handlers calls before outer ones", () -> {
-				suite.addAfterEachHandler(block.apply("outerBeforeEach"));
+				suite.addAfterEachHandler(block.apply("outer"));
 				Suite child = new Suite(suite, "child");
-				child.addAfterEachHandler(block.apply("innerBeforeEach"));
+				child.addAfterEachHandler(block.apply("inner"));
 				runner.runChild(new Spec(child, "spec", () -> {
 				}), new RunNotifier());
-				assertEquals(Arrays.asList("innerBeforeEach", "outerBeforeEach"), calls);
+				assertEquals(Arrays.asList("inner", "outer"), calls);
 			});
 		});
 	});
