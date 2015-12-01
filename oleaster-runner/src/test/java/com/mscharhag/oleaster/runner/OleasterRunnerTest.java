@@ -92,6 +92,12 @@ public class OleasterRunnerTest {
 				assertEquals(Arrays.asList("before", "spec"), calls);
 			});
 
+			it("executes after handlers once after the last spec is executed", () -> {
+				suite.addAfterHandler(block.apply("after"));
+				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
+				assertEquals(Arrays.asList("spec", "after"), calls);
+			});
+
 			it("executes beforeEach handlers before the spec is executed", () -> {
 				suite.addBeforeEachHandler(block.apply("beforeEach"));
 				runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());

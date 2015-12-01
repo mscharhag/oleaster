@@ -107,6 +107,21 @@ public class StaticRunnerSupport {
 	}
 
 	/**
+	 * Creates a new {@code after} handler for the surrounding test suite.
+	 * <p>For example:
+	 * <pre>{@code
+	 * after(() -> {
+	 *   // this code runs once after last spec in suite
+	 * });
+	 * }</pre>
+	 * @param block A code block that is executed once after last spec in suite
+	 */
+	public static void after(Invokable block) {
+		failIfNoSuiteBuilderAvailable("after");
+		suiteBuilder.after(block);
+	}
+
+	/**
 	 * Creates a new {@code afterEach} handler for the surrounding test suite.
 	 * <p>For example:
 	 * <pre>{@code

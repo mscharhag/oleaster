@@ -43,6 +43,7 @@ public class SuiteDefinitionEvaluator {
 		suite.addBeforeHandlers(suiteBuilder.getBeforeHandlers());
 		suite.addBeforeEachHandlers(suiteBuilder.getBeforeEachHandlers());
 		suite.addAfterEachHandlers(suiteBuilder.getAfterEachHandlers());
+		suite.addAfterHandlers(suiteBuilder.getAfterHandlers());
 
 		suiteBuilder.getSpecDefinitions().forEach((description, block) -> {
 			suite.addSpec(new Spec(suite, description, block));

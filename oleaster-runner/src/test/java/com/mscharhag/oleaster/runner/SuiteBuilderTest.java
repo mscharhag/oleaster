@@ -34,6 +34,7 @@ public class SuiteBuilderTest {
 			suiteBuilder.before(invokable);
 			suiteBuilder.beforeEach(invokable);
 			suiteBuilder.afterEach(invokable);
+			suiteBuilder.after(invokable);
 			suiteBuilder.it("test spec", invokable);
 
 			suiteBuilder.beforeEvaluation();
@@ -103,6 +104,16 @@ public class SuiteBuilderTest {
 
 			it("returns the newly added handler", () -> {
 				assertEquals(Arrays.asList(invokable), suiteBuilder.getAfterEachHandlers());
+			});
+		});
+
+		describe("when a after handler is added", () -> {
+			beforeEach(() -> {
+				suiteBuilder.after(invokable);
+			});
+
+			it("returns the newly added handler", () -> {
+				assertEquals(Arrays.asList(invokable), suiteBuilder.getAfterHandlers());
 			});
 		});
 	});
