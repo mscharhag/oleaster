@@ -125,9 +125,7 @@ public class OleasterRunner extends ParentRunner<Spec> {
 	}
 
 	private void runAfterCallbacks(Spec spec) {
-		List<Invokable> afterHandlers = this.collectInvokables(spec.getSuite(), Suite::getAfterHandlers);
-		Collections.reverse(afterHandlers);
-		this.runInvokables(afterHandlers);
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterHandlers));
 	}
 
 
