@@ -39,7 +39,11 @@ public class MatchersTest {{
 		});
 
 		it("Date", () -> {
-			expect(new Date()).toBeCloseTo(new Date(), 5);
+			Long millis = System.currentTimeMillis();
+			Integer delta = 5;
+			Date date = new Date(millis);
+			Date dateWithinDelta = new Date(millis+delta-1);
+			expect(date).toBeCloseTo(dateWithinDelta, delta);
 		});
 
 	});

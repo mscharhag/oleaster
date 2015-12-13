@@ -66,9 +66,18 @@ public class OleasterRunner extends ParentRunner<Spec> {
 
 	@Override
 	protected void runChild(Spec spec, RunNotifier notifier) {
+		Boolean suiteHasNoSpecs = spec.getSuite().getSpecs().isEmpty();
+		Boolean firstOrOnlySpec = suiteHasNoSpecs || spec.getSuite().getSpecs().indexOf(spec) == 0;
+		Boolean lastOrOnlySpec = suiteHasNoSpecs || spec.getSuite().getSpecs().indexOf(spec) == spec.getSuite().getSpecs().size() -1;
+		if(firstOrOnlySpec){
+			runBeforeCallbacks(spec);
+		}
 		runBeforeEachCallbacks(spec);
 		runLeaf(spec, describeChild(spec), notifier);
 		runAfterEachCallbacks(spec);
+		if(lastOrOnlySpec){
+			runAfterCallbacks(spec);
+		}
 	}
 
 
@@ -104,9 +113,21 @@ public class OleasterRunner extends ParentRunner<Spec> {
 		this.runInvokables(beforeEachHandlers);
 	}
 
+	private void runBeforeCallbacks(Spec spec) {
+		List<Invokable> beforeHandlers = this.collectInvokables(spec.getSuite(), Suite::getBeforeHandlers);
+		Collections.reverse(beforeHandlers);
+		this.runInvokables(beforeHandlers);
+	}
+
 
 	private void runAfterEachCallbacks(Spec spec) {
 		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterEachHandlers));
+	}
+
+	private void runAfterCallbacks(Spec spec) {
+		List<Invokable> afterHandlers = this.collectInvokables(spec.getSuite(), Suite::getAfterHandlers);
+		Collections.reverse(afterHandlers);
+		this.runInvokables(afterHandlers);
 	}
 
 
