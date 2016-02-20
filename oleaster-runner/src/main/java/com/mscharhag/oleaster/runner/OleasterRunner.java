@@ -66,16 +66,20 @@ public class OleasterRunner extends ParentRunner<Spec> {
 
 	@Override
 	protected void runChild(Spec spec, RunNotifier notifier) {
-		Boolean suiteHasNoSpecs = spec.getSuite().getSpecs().isEmpty();
-		Boolean firstOrOnlySpec = suiteHasNoSpecs || spec.getSuite().getSpecs().indexOf(spec) == 0;
-		Boolean lastOrOnlySpec = suiteHasNoSpecs || spec.getSuite().getSpecs().indexOf(spec) == spec.getSuite().getSpecs().size() -1;
-		if(firstOrOnlySpec){
+		List<Spec> specs = spec.getSuite().getSpecs();
+		boolean suiteHasNoSpecs = specs.isEmpty();
+		boolean isFirstSpec = specs.indexOf(spec) == 0;
+		boolean isLastSpec = specs.indexOf(spec) == specs.size() -1;
+
+		if (suiteHasNoSpecs || isFirstSpec){
 			runBeforeCallbacks(spec);
 		}
+
 		runBeforeEachCallbacks(spec);
 		runLeaf(spec, describeChild(spec), notifier);
 		runAfterEachCallbacks(spec);
-		if(lastOrOnlySpec){
+
+		if (suiteHasNoSpecs || isLastSpec){
 			runAfterCallbacks(spec);
 		}
 	}
@@ -108,50 +112,42 @@ public class OleasterRunner extends ParentRunner<Spec> {
 
 
 	private void runBeforeEachCallbacks(Spec spec) {
-		List<List<Invokable>> lists = this.collectInvokableList(spec.getSuite(), Suite::getBeforeEachHandlers);
-		Collections.reverse(lists);
-		List<Invokable> flatList = new ArrayList<>();
-		for (List<Invokable> list : lists) {
-			flatList.addAll(list);
-		}
-		this.runInvokables(flatList);
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getBeforeEachHandlers, true));
 	}
 
+
 	private void runBeforeCallbacks(Spec spec) {
-		List<Invokable> beforeHandlers = this.collectInvokables(spec.getSuite(), Suite::getBeforeHandlers);
-		Collections.reverse(beforeHandlers);
-		this.runInvokables(beforeHandlers);
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getBeforeHandlers, true));
 	}
 
 
 	private void runAfterEachCallbacks(Spec spec) {
-		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterEachHandlers));
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterEachHandlers, false));
 	}
+
 
 	private void runAfterCallbacks(Spec spec) {
-		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterHandlers));
+		this.runInvokables(this.collectInvokables(spec.getSuite(), Suite::getAfterHandlers, false));
 	}
 
 
-	private List<Invokable> collectInvokables(Suite suite, Function<Suite, List<Invokable>> method) {
-		List<Invokable> invokables = new ArrayList<>();
-		Suite parent = suite;
-		while (parent != null) {
-			invokables.addAll(method.apply(parent));
-			parent = parent.getParent();
-		}
-		return invokables;
-	}
-
-
-	private List<List<Invokable>> collectInvokableList(Suite suite, Function<Suite, List<Invokable>> method) {
+	private List<Invokable> collectInvokables(Suite suite, Function<Suite, List<Invokable>> method, boolean reverseOrder) {
 		List<List<Invokable>> lists = new ArrayList<>();
 		Suite parent = suite;
 		while (parent != null) {
 			lists.add(new ArrayList<>(method.apply(parent)));
 			parent = parent.getParent();
 		}
-		return lists;
+
+		if (reverseOrder) {
+			Collections.reverse(lists);
+		}
+
+		List<Invokable> flatList = new ArrayList<>();
+		for (List<Invokable> list : lists) {
+			flatList.addAll(list);
+		}
+		return flatList;
 	}
 
 

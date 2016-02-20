@@ -19,18 +19,67 @@ public class HandlerTest {
     private Function<String, Invokable> block = (String name) -> () -> { calls.add(name); };
     private OleasterRunner runner;
     private Suite suite;
+    private Spec first;
+    private Spec second;
+    private Spec spec;
 
     public static class TestClass { }
+
 
     @Before
     public void before() throws Exception {
         calls = new ArrayList<>();
         runner = new OleasterRunner(TestClass.class);
         suite = new Suite(null, "suite");
+        first = new Spec(suite, "spec", block.apply("first-spec"));
+        second = new Spec(suite, "spec", block.apply("second-spec"));
+        spec = new Spec(suite, "spec", block.apply("spec"));
     }
 
+
     @Test
-    public void itExecutesBeforeEachHandlersInCorrectOrder() {
+    public void itExecutesBeforeHandlersBeforeTheFirstSpecIsExecuted() {
+        suite.addBeforeHandler(block.apply("before"));
+        suite.addSpec(first);
+        suite.addSpec(second);
+        runner.runChild(first, new RunNotifier());
+        runner.runChild(second, new RunNotifier());
+        assertEquals(Arrays.asList("before", "first-spec", "second-spec"), calls);
+    }
+
+
+    @Test
+    public void itExecutesAfterHandlersOnceAfterTheLastSpecIsExecuted() {
+        suite.addAfterHandler(block.apply("after"));
+        suite.addSpec(first);
+        suite.addSpec(second);
+        runner.runChild(first, new RunNotifier());
+        runner.runChild(second, new RunNotifier());
+        assertEquals(Arrays.asList("first-spec", "second-spec", "after"), calls);
+    }
+
+
+    @Test
+    public void itExecutesOuterBeforeHandlersBeforeInnerOnes() {
+        suite.addBeforeHandler(block.apply("outerBefore"));
+        Suite child = new Suite(suite, "child");
+        child.addBeforeHandler(block.apply("innerBefore"));
+        runner.runChild(new Spec(child, "spec", block.apply("spec")), new RunNotifier());
+        assertEquals(Arrays.asList("outerBefore", "innerBefore", "spec"), calls);
+    }
+
+
+    @Test
+    public void itExecutesBeforeHandlersInSpecifiedOrder() {
+        suite.addBeforeHandler(block.apply("first"));
+        suite.addBeforeHandler(block.apply("second"));
+        runner.runChild(spec, new RunNotifier());
+        assertEquals(Arrays.asList("first", "second", "spec"), calls);
+    }
+
+
+    @Test
+    public void itExecutesBeforeEachHandlersInSpecifiedOrder() {
         suite.addBeforeEachHandler(block.apply("first"));
         suite.addBeforeEachHandler(block.apply("second"));
         runner.runChild(new Spec(suite, "spec", () -> {}), new RunNotifier());
@@ -39,7 +88,7 @@ public class HandlerTest {
 
 
     @Test
-    public void itExecutesAfterEachHandlersInCorrectOrder() {
+    public void itExecutesAfterEachHandlersInSpecifiedOrder() {
         suite.addAfterEachHandler(block.apply("first"));
         suite.addAfterEachHandler(block.apply("second"));
         runner.runChild(new Spec(suite, "spec", () -> {}), new RunNotifier());
@@ -54,12 +103,14 @@ public class HandlerTest {
         assertEquals(Arrays.asList("beforeEach", "spec"), calls);
     }
 
+
     @Test
     public void itExecutesAfterEachHandlersAfterTheSpecIsExecuted() {
         suite.addAfterEachHandler(block.apply("afterEach"));
         runner.runChild(new Spec(suite, "spec", block.apply("spec")), new RunNotifier());
         assertEquals(Arrays.asList("spec", "afterEach"), calls);
     }
+
 
     @Test
     public void itExecutesOuterBeforeEachHandlersBeforeInnerOnes() {
@@ -69,6 +120,7 @@ public class HandlerTest {
         runner.runChild(new Spec(child, "spec", () -> { }), new RunNotifier());
         assertEquals(Arrays.asList("outerBeforeEach", "innerBeforeEach"), calls);
     }
+
 
     @Test
     public void itExecutesInnerAfterEachHandlersBeforeOuterOnes() {
