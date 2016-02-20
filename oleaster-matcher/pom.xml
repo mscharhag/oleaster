@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster</artifactId>
-		<version>0.1.2-SNAPSHOT</version>
+		<version>0.1.2</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-matcher</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 
 	<name>Oleaster Matcher</name>
 	<packaging>jar</packaging>

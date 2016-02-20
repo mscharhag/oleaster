@@ -13,7 +13,7 @@
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	<name>Oleaster</name>
 
 	<modules>
