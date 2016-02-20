@@ -108,9 +108,13 @@ public class OleasterRunner extends ParentRunner<Spec> {
 
 
 	private void runBeforeEachCallbacks(Spec spec) {
-		List<Invokable> beforeEachHandlers = this.collectInvokables(spec.getSuite(), Suite::getBeforeEachHandlers);
-		Collections.reverse(beforeEachHandlers);
-		this.runInvokables(beforeEachHandlers);
+		List<List<Invokable>> lists = this.collectInvokableList(spec.getSuite(), Suite::getBeforeEachHandlers);
+		Collections.reverse(lists);
+		List<Invokable> flatList = new ArrayList<>();
+		for (List<Invokable> list : lists) {
+			flatList.addAll(list);
+		}
+		this.runInvokables(flatList);
 	}
 
 	private void runBeforeCallbacks(Spec spec) {
@@ -137,6 +141,17 @@ public class OleasterRunner extends ParentRunner<Spec> {
 			parent = parent.getParent();
 		}
 		return invokables;
+	}
+
+
+	private List<List<Invokable>> collectInvokableList(Suite suite, Function<Suite, List<Invokable>> method) {
+		List<List<Invokable>> lists = new ArrayList<>();
+		Suite parent = suite;
+		while (parent != null) {
+			lists.add(new ArrayList<>(method.apply(parent)));
+			parent = parent.getParent();
+		}
+		return lists;
 	}
 
 
