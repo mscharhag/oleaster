@@ -46,14 +46,14 @@ Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
 	<dependency>
     	<groupId>com.mscharhag.oleaster</groupId>
     	<artifactId>oleaster-matcher</artifactId>
-    	<version>0.1.1</version>
+    	<version>0.1.2</version>
     </dependency>
     
 	<!-- Oleaster JUnit runner -->
 	<dependency>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster-runner</artifactId>
-		<version>0.1.1</version>
+		<version>0.1.2</version>
 	</dependency>
 
 	<!-- Of course a JUnit runner can only be used with JUnit -->
