@@ -34,7 +34,7 @@ The [Oleaster JUnit Runner](https://github.com/mscharhag/oleaster/tree/master/ol
 
 [Source of the AudioPlayer example](https://github.com/mscharhag/oleaster/blob/master/oleaster-examples/src/test/java/com/mscharhag/oleaster/examples/AudioPlayerExampleTest.java) from the Oleaster Runner documentation.
 
-Oleaster tests are written with Oleaster (see: [Oleaster JUnit Runner Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) and [Oleaster Matcher Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher/src/test/java/com/mscharhag/oleaster/matcher/matchers)).
+Oleaster tests are (mostly) written with Oleaster (see: [Oleaster JUnit Runner Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-runner/src/test/java/com/mscharhag/oleaster/runner) and [Oleaster Matcher Tests](https://github.com/mscharhag/oleaster/tree/master/oleaster-matcher/src/test/java/com/mscharhag/oleaster/matcher/matchers)).
 
 Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
 
