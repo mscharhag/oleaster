@@ -1,20 +1,21 @@
 package com.mscharhag.oleaster.runner;
 
+import java.util.Optional;
+
 import com.mscharhag.oleaster.runner.suite.Spec;
 import com.mscharhag.oleaster.runner.suite.Suite;
+
 import org.junit.runner.RunWith;
 
-import static com.mscharhag.oleaster.runner.StaticRunnerSupport.beforeEach;
-import static com.mscharhag.oleaster.runner.StaticRunnerSupport.describe;
-import static com.mscharhag.oleaster.runner.StaticRunnerSupport.it;
-import static org.junit.Assert.assertEquals;
+import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
+import static org.junit.Assert.*;
 
 @RunWith(OleasterRunner.class)
 public class SpecTest {
 
 	private Suite suite;
 	private Spec spec;
-	private Invokable emptyInvokable = () -> {};
+	private Optional<Invokable> emptyInvokable = Optional.of(() -> {});
 
 {
 	describe("Spec", () -> {

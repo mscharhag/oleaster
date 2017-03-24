@@ -75,6 +75,11 @@ public class StaticRunnerSupport {
 		suiteBuilder.it(text, block);
 	}
 
+	public static void xit(String text, Invokable block) {
+		failIfNoSuiteBuilderAvailable("xit");
+		suiteBuilder.xit(text, block);
+	}
+
 
 	/**
 	 * Creates a new {@code beforeEach} handler for the surrounding test suite.

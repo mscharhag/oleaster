@@ -15,16 +15,19 @@
 */
 package com.mscharhag.oleaster.runner.suite;
 
+import java.util.Optional;
+
 import com.mscharhag.oleaster.runner.Invokable;
+
 import org.junit.runners.model.Statement;
 
 public class Spec extends Statement {
 
 	private Suite suite;
 	private String description;
-	private Invokable block;
+	private Optional<Invokable> block;
 
-	public Spec(Suite suite, String description, Invokable block) {
+	public Spec(Suite suite, String description, Optional<Invokable> block) {
 		this.suite = suite;
 		this.description = description;
 		this.block = block;
@@ -48,6 +51,8 @@ public class Spec extends Statement {
 
 	@Override
 	public void evaluate() throws Throwable {
-		block.invoke();
+		if (block.isPresent()) {
+			block.get().invoke();
+		}
 	}
 }

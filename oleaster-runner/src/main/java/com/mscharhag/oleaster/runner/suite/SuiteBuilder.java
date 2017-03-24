@@ -16,17 +16,18 @@
 package com.mscharhag.oleaster.runner.suite;
 
 
-import com.mscharhag.oleaster.runner.Invokable;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
+import com.mscharhag.oleaster.runner.Invokable;
 
 public class SuiteBuilder {
 
 	private Map<String, Invokable> suiteDefinitions;
-	private Map<String, Invokable> specDefinitions;
+	private Map<String, Optional<Invokable>> specDefinitions;
 	private List<Invokable> beforeEachHandlers;
 	private List<Invokable> beforeHandlers;
 	private List<Invokable> afterEachHandlers;
@@ -64,7 +65,14 @@ public class SuiteBuilder {
 		if (this.specDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
 		}
-		this.specDefinitions.put(description, definition);
+		this.specDefinitions.put(description, Optional.of(definition));
+	}
+
+	public void xit(String description, Invokable definition) {
+		if (this.specDefinitions.containsKey(description)) {
+			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
+		}
+		this.specDefinitions.put(description, Optional.empty());
 	}
 
 	public void beforeEach(Invokable block) {
@@ -87,7 +95,7 @@ public class SuiteBuilder {
 		return suiteDefinitions;
 	}
 
-	public Map<String, Invokable> getSpecDefinitions() {
+	public Map<String, Optional<Invokable>> getSpecDefinitions() {
 		return specDefinitions;
 	}
 
