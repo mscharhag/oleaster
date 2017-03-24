@@ -57,6 +57,24 @@ public class StaticRunnerSupport {
 		suiteBuilder.describe(text, block);
 	}
 
+	/**
+	 * Creates a pending test suite.
+	 * <p>Test suites can contain:
+	 * <ul>
+	 *     	<li>specs (defined by using {@code it()}</li>
+	 *     	<li>other suites (defined by nesting {@code describe()} calls)</li>
+	 * 		<li>{@code beforeEach()} and {@code afterEach()} handlers.</li>
+	 * </ul>
+	 * <p>For example:
+	 * <pre>{@code
+	 * xdescribe("my test suite", () -> {
+	 * 		// This will not be executed
+	 *     ...
+	 * });
+	 * }</pre>
+	 * @param text A description of the test suite
+	 * @param block A code block that represents the test suite
+	 */
 	public static void xdescribe(String text, PendingInvokable block) {
 		failIfNoSuiteBuilderAvailable("xdescribe");
 		suiteBuilder.xdescribe(text, block);
