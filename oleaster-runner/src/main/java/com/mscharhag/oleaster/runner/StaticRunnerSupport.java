@@ -80,6 +80,20 @@ public class StaticRunnerSupport {
 		suiteBuilder.it(text, block);
 	}
 
+
+	/**
+	 * Create a new pending spec.
+	 * <p>Pending specs are used to temporarily disable specs.
+	 * <p>For example:
+	 * <pre>{@code
+	 * xit("returns a list containing one item", () -> {
+	 *   // This will not be executed.
+	 *   assertEquals(1, getList().size());
+	 * });
+	 * }</pre>
+	 * @param text A description of the expected behavior
+	 * @param block A code block that implements the validation
+	 */
 	public static void xit(String text, Invokable block) {
 		failIfNoSuiteBuilderAvailable("xit");
 		suiteBuilder.xit(text);
