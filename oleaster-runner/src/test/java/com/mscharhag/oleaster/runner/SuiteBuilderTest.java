@@ -1,16 +1,15 @@
 package com.mscharhag.oleaster.runner;
 
-import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
+import java.util.Arrays;
+import java.util.Optional;
 
-import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteBuilderCollections;
-import static com.mscharhag.oleaster.runner.AssertUtil.expect;
-import static org.junit.Assert.*;
+import com.mscharhag.oleaster.runner.suite.SuiteBuilder;
 
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
-
+import static com.mscharhag.oleaster.runner.AssertUtil.*;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
+import static org.junit.Assert.*;
 
 @RunWith(OleasterRunner.class)
 public class SuiteBuilderTest {
@@ -67,7 +66,7 @@ public class SuiteBuilderTest {
 			});
 
 			it("returns the new spec", () -> {
-				assertEquals(invokable, suiteBuilder.getSpecDefinitions().get("new spec"));
+				assertEquals(Optional.of(invokable), suiteBuilder.getSpecDefinitions().get("new spec"));
 			});
 
 			it("is not possible to add another spec with the same name", () -> {

@@ -15,6 +15,8 @@
 */
 package com.mscharhag.oleaster.runner.suite;
 
+import java.util.Optional;
+
 public class SuiteDefinitionEvaluator {
 
 
@@ -45,12 +47,11 @@ public class SuiteDefinitionEvaluator {
 		suite.addAfterEachHandlers(suiteBuilder.getAfterEachHandlers());
 		suite.addAfterHandlers(suiteBuilder.getAfterHandlers());
 
-		suiteBuilder.getSpecDefinitions().forEach((description, block) -> {
-			suite.addSpec(new Spec(suite, description, block));
-		});
+		suiteBuilder.getSpecDefinitions().forEach((description, block) ->
+				suite.addSpec(new Spec(suite, description, suiteDefinition.isPending() ? Optional.empty() : block)));
 
 		suiteBuilder.getSuiteDefinitions().forEach((description, block) -> {
-			SuiteDefinition childSuiteDefinition = new SuiteDefinition(suite, description, block);
+			SuiteDefinition childSuiteDefinition = new SuiteDefinition(suite, description, block, suiteDefinition.isPending());
 			suite.addChildSuite(this.evaluate(childSuiteDefinition, suiteBuilder));
 		});
 
