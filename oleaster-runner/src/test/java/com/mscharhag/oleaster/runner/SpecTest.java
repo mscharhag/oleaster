@@ -41,20 +41,24 @@ public class SpecTest {
 				assertEquals("suite, it test spec", spec.getFullDescription());
 			});
 
-			xit("the ignored it shall not be executed", () -> {
-				assertTrue(false);
-			});
+			xit("a pending spec should not be executed", () ->
+					fail("'xit' specs should not be executed!"));
 
-			describe("Nested describe one should be executed", () -> {
-				it ("shall be evaluated", () -> assertTrue(true));
-				it ("shall also be evaluated", () -> assertTrue(true));
-			});
+			describe("a nested describe should be executed", () ->
+				it("should be fine", () ->
+					assertTrue(true)));
 
-			xdescribe("Nested describe that shall not be executed", () -> {
-				it("shall not be evaluated", () -> assertTrue(false));
-				it("shall also not be evaluated", () -> assertTrue(false));
-				describe("Nested in xdescribe should also not be executed", () ->
-					it("shall not be executed", () -> assertTrue(false)));
+			xdescribe("a pending describe should not be executed", () -> {
+				it("should not be executed", () -> fail("'it' in 'xdescribe' should not be executed!"));
+
+				describe("a describe with a xdescribe parent", () -> {
+					it("should not be executed", () ->
+						fail("'it' in 'describe' with 'xdescribe' parent should not be executed!"));
+
+					describe("a describe with a xdescribe grandparent", () ->
+						it("should not be executed", () ->
+							fail("'it' in 'describe' with 'xdescribe' grandparent should not be executed!")));
+				});
 			});
 		});
 
