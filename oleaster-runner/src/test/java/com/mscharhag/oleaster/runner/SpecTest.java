@@ -40,6 +40,10 @@ public class SpecTest {
 			it("returns the suite description followed by the spec description as full description", () -> {
 				assertEquals("suite, it test spec", spec.getFullDescription());
 			});
+
+			xit("the ignored it shall not be executed", () -> {
+				assertTrue(false);
+			});
 		});
 
 		describe("when the suite has a parent suite", () -> {

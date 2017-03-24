@@ -55,4 +55,8 @@ public class Spec extends Statement {
 			block.get().invoke();
 		}
 	}
+
+	public Optional<Invokable> getBlock() {
+		return block;
+	}
 }
