@@ -98,6 +98,19 @@ public class StaticRunnerSupport {
 		suiteBuilder.it(text, block);
 	}
 
+	/**
+	 * Create a new pending spec.
+	 * <p>Pending specs are used to temporarily disable specs.
+	 * <p>For example:
+	 * <pre>{@code
+	 * it("returns a list containing one item");
+	 * }</pre>
+	 * @param text A description of the expected behavior
+	 */
+	public static void it(String text) {
+		failIfNoSuiteBuilderAvailable("it");
+		suiteBuilder.xit(text);
+	}
 
 	/**
 	 * Create a new pending spec.

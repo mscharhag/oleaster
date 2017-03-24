@@ -40,26 +40,6 @@ public class SpecTest {
 			it("returns the suite description followed by the spec description as full description", () -> {
 				assertEquals("suite, it test spec", spec.getFullDescription());
 			});
-
-			xit("a pending spec should not be executed", () ->
-					fail("'xit' specs should not be executed!"));
-
-			describe("a nested describe should be executed", () ->
-				it("should be fine", () ->
-					assertTrue(true)));
-
-			xdescribe("a pending describe should not be executed", () -> {
-				it("should not be executed", () -> fail("'it' in 'xdescribe' should not be executed!"));
-
-				describe("a describe with a xdescribe parent", () -> {
-					it("should not be executed", () ->
-						fail("'it' in 'describe' with 'xdescribe' parent should not be executed!"));
-
-					describe("a describe with a xdescribe grandparent", () ->
-						it("should not be executed", () ->
-							fail("'it' in 'describe' with 'xdescribe' grandparent should not be executed!")));
-				});
-			});
 		});
 
 		describe("when the suite has a parent suite", () -> {
