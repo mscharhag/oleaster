@@ -56,31 +56,35 @@ public class SuiteBuilder {
 	}
 
 	public void describe(String description, Invokable definition) {
-		if (this.suiteDefinitions.containsKey(description)) {
-			throw new IllegalArgumentException(String.format("Suite with description '%s' does already exist", description));
-		}
+		throwExceptionWhenSuiteDescriptionExists(description);
 		this.suiteDefinitions.put(description, definition);
 	}
 
 	public void xdescribe(String description, PendingInvokable definition) {
-		if (this.suiteDefinitions.containsKey(description)) {
-			throw new IllegalArgumentException(String.format("Suite with description '%s' does already exist", description));
-		}
+		throwExceptionWhenSuiteDescriptionExists(description);
 		this.suiteDefinitions.put(description, definition);
 	}
 
-	public void it(String description, Invokable definition) {
-		if (this.specDefinitions.containsKey(description)) {
-			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
+	private void throwExceptionWhenSuiteDescriptionExists(final String description) {
+		if (this.suiteDefinitions.containsKey(description)) {
+			throw new IllegalArgumentException(String.format("Suite with description '%s' does already exist", description));
 		}
+	}
+
+	public void it(String description, Invokable definition) {
+		throwExceptionWhenSpecDescriptionExists(description);
 		this.specDefinitions.put(description, Optional.of(definition));
 	}
 
 	public void xit(String description) {
+		throwExceptionWhenSpecDescriptionExists(description);
+		this.specDefinitions.put(description, Optional.empty());
+	}
+
+	private void throwExceptionWhenSpecDescriptionExists(final String description) {
 		if (this.specDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
 		}
-		this.specDefinitions.put(description, Optional.empty());
 	}
 
 	public void beforeEach(Invokable block) {
