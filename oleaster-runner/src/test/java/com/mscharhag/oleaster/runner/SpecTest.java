@@ -46,8 +46,8 @@ public class SpecTest {
 			});
 
 			describe("Nested describe one should be executed", () -> {
-				it ("shall be evaluated", () -> assertTrue(true));
-				it ("shall also be evaluated", () -> assertTrue(true));
+				it("shall be evaluated", () -> assertTrue(true));
+				it("shall also be evaluated", () -> assertTrue(true));
 			});
 
 			xdescribe("Nested describe that shall not be executed", () -> {
