@@ -8,10 +8,11 @@ import com.mscharhag.oleaster.runner.suite.SuiteDefinitionEvaluator;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteCollections;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(OleasterRunner.class)
 public class SuiteDefinitionEvaluatorTest {
@@ -108,6 +109,46 @@ public class SuiteDefinitionEvaluatorTest {
 			it("sets the parent of the child suite", () -> {
 				Suite childSuite = suite.getSuites().get(0);
 				assertEquals(suite, childSuite.getParent());
+			});
+		});
+
+		describe("when a suite is pending", () -> {
+			final String DESC_ROOT = "root level";
+			final String DESC_ONE = "one";
+			final String DESC_TWO = "two";
+			final String DESC_TWO_ONE = "two > one";
+			beforeEach(() -> {
+				suite = sde.evaluate(new SuiteDefinition(null, DESC_ROOT, () -> {
+					sb.xdescribe(DESC_ONE, () -> {
+						sb.it("hello", () -> {
+							fail("I should be removed");
+						});
+					});
+
+					sb.xdescribe(DESC_TWO, () -> {
+						sb.describe(DESC_TWO_ONE, () -> {
+							sb.it("hello", () -> {
+								fail("I should be removed");
+							});
+						});
+					});
+				}), sb);
+			});
+
+			it("should remove the it block of the it in DESC_ONE", () -> {
+				final Suite descOneSuite = suite.getSuites().get(0);
+				assertEquals(DESC_ONE, descOneSuite.getDescription());
+				assertEquals(Optional.empty(), descOneSuite.getSpecs().get(0).getBlock());
+			});
+
+			it("should remove the it block of the it which is deeper nested in DESC_TWO", () -> {
+				final Suite descTwoSuite = suite.getSuites().get(1);
+				assertEquals(DESC_TWO, descTwoSuite.getDescription());
+
+				final Suite deskTwoOneSuite = descTwoSuite.getSuites().get(0);
+				assertEquals(DESC_TWO_ONE, deskTwoOneSuite.getDescription());
+
+				assertEquals(Optional.empty(), deskTwoOneSuite.getSpecs().get(0).getBlock());
 			});
 		});
 

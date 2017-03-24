@@ -40,22 +40,6 @@ public class SpecTest {
 			it("returns the suite description followed by the spec description as full description", () -> {
 				assertEquals("suite, it test spec", spec.getFullDescription());
 			});
-
-			xit("the ignored it shall not be executed", () -> {
-				assertTrue(false);
-			});
-
-			describe("Nested describe one should be executed", () -> {
-				it("shall be evaluated", () -> assertTrue(true));
-				it("shall also be evaluated", () -> assertTrue(true));
-			});
-
-			xdescribe("Nested describe that shall not be executed", () -> {
-				it("shall not be evaluated", () -> assertTrue(false));
-				it("shall also not be evaluated", () -> assertTrue(false));
-				describe("Nested in xdescribe should also not be executed", () ->
-					it("shall not be executed", () -> assertTrue(false)));
-			});
 		});
 
 		describe("when the suite has a parent suite", () -> {
