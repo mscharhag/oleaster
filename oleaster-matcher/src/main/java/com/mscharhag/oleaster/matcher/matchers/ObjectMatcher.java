@@ -16,8 +16,7 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 
-import static com.mscharhag.oleaster.matcher.util.Expectations.expectTrue;
-import static com.mscharhag.oleaster.matcher.util.Expectations.expectNotNull;
+import static com.mscharhag.oleaster.matcher.util.Expectations.*;
 
 /**
  * Matcher class to validate Objects of type {@code T}.
@@ -58,6 +57,15 @@ public class ObjectMatcher<T> {
 	 */
 	public void toBeNotNull() {
 		expectTrue(this.value != null, "Expected null to be not null");
+	}
+
+	/**
+	 * Checks if the stored value is an instance of the {@code expectedClass}
+	 *  <p>This method throws an {@code AssertionError} if the stored value is not of instance of {@code expectedClass}.
+	 * @param expectedClass
+	 */
+	public void toBeInstanceOf(Class<?> expectedClass) {
+		expectTrue(value.getClass().equals(expectedClass), "Expected '%s' to be instance of '%s'", this.value, expectedClass.getName());
 	}
 
 	protected T getValue() {

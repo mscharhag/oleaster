@@ -1,9 +1,10 @@
 package com.mscharhag.oleaster.matcher.matchers;
 
 import com.mscharhag.oleaster.runner.OleasterRunner;
+
 import org.junit.runner.RunWith;
 
-import static com.mscharhag.oleaster.matcher.TestUtil.expectAssertionError;
+import static com.mscharhag.oleaster.matcher.TestUtil.*;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 
 @RunWith(OleasterRunner.class)
@@ -51,6 +52,16 @@ public class ObjectMatcherTest {{
 
 			it("is ok if the value is not null", () -> {
 				new ObjectMatcher<>("foo").toBeNotNull();
+			});
+		});
+
+		describe("when toBeInstanceOf() is called", () -> {
+			it("fails if the value is not of instance of input", () -> {
+				expectAssertionError(() -> new ObjectMatcher<>("foo").toBeInstanceOf(Integer.class), "Expected 'foo' to be instance of 'java.lang.Integer'");
+			});
+
+			it("is ok if the value is instance of the expected class", () -> {
+				new ObjectMatcher<>("foo").toBeInstanceOf(String.class);
 			});
 		});
 	});
