@@ -58,6 +58,28 @@ public class StaticRunnerSupport {
 	}
 
 	/**
+	 * Creates a focussed test suite.
+	 * <p>Test suites can contain:
+	 * <ul>
+	 *     	<li>specs (defined by using {@code it()}</li>
+	 *     	<li>other suites (defined by nesting {@code describe()} calls)</li>
+	 * 		<li>{@code beforeEach()} and {@code afterEach()} handlers.</li>
+	 * </ul>
+	 * <p>For example:
+	 * <pre>{@code
+	 * fdescribe("my test suite", () -> {
+	 *     ...
+	 * });
+	 * }</pre>
+	 * @param text A description of the test suite
+	 * @param block A code block that represents the test suite
+	 */
+	public static void fdescribe(String text, Invokable block) {
+		failIfNoSuiteBuilderAvailable("fdescribe");
+		suiteBuilder.fdescribe(text, block);
+	}
+
+	/**
 	 * Creates a pending test suite.
 	 * <p>Test suites can contain:
 	 * <ul>
@@ -96,6 +118,23 @@ public class StaticRunnerSupport {
 	public static void it(String text, Invokable block) {
 		failIfNoSuiteBuilderAvailable("it");
 		suiteBuilder.it(text, block);
+	}
+
+	/**
+	 * Create a new focussed spec.
+	 * <p>Focussed specs are used to temporarily only run these tests and disable the other specs.
+	 * <p>For example:
+	 * <pre>{@code
+	 * fit("returns a list containing one item", () -> {
+	 *   assertEquals(1, getList().size());
+	 * });
+	 * }</pre>
+	 * @param text A description of the expected behavior
+	 * @param block A code block that implements the validation
+	 */
+	public static void fit(String text, Invokable block) {
+		failIfNoSuiteBuilderAvailable("fit");
+		suiteBuilder.fit(text, block);
 	}
 
 	/**
