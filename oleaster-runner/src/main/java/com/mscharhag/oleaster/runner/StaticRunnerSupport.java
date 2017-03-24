@@ -57,6 +57,11 @@ public class StaticRunnerSupport {
 		suiteBuilder.describe(text, block);
 	}
 
+	public static void xdescribe(String text, PendingInvokable block) {
+		failIfNoSuiteBuilderAvailable("xdescribe");
+		suiteBuilder.xdescribe(text, block);
+	}
+
 
 	/**
 	 * Create a new spec.
@@ -77,7 +82,7 @@ public class StaticRunnerSupport {
 
 	public static void xit(String text, Invokable block) {
 		failIfNoSuiteBuilderAvailable("xit");
-		suiteBuilder.xit(text, block);
+		suiteBuilder.xit(text);
 	}
 
 

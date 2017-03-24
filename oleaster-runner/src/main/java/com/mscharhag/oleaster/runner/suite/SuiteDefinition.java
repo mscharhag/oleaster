@@ -16,18 +16,24 @@
 package com.mscharhag.oleaster.runner.suite;
 
 import com.mscharhag.oleaster.runner.Invokable;
+import com.mscharhag.oleaster.runner.PendingInvokable;
 
 public class SuiteDefinition {
 
 	private Suite parent;
 	private String description;
 	private Invokable block;
+	private boolean parentIsPending;
 
 
 	public SuiteDefinition(Suite parent, String description, Invokable block) {
+		this(parent, description, block, false);
+	}
+	public SuiteDefinition(Suite parent, String description, Invokable block, boolean parentIsPending) {
 		this.parent = parent;
 		this.description = description;
 		this.block = block;
+		this.parentIsPending = parentIsPending;
 	}
 
 	public Suite getParent() {
@@ -40,5 +46,9 @@ public class SuiteDefinition {
 
 	public Invokable getBlock() {
 		return block;
+	}
+
+	public boolean isPending() {
+		return block instanceof PendingInvokable || parentIsPending;
 	}
 }

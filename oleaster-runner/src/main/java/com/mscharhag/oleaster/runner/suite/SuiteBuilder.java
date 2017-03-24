@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.mscharhag.oleaster.runner.Invokable;
+import com.mscharhag.oleaster.runner.PendingInvokable;
 
 public class SuiteBuilder {
 
@@ -61,6 +62,13 @@ public class SuiteBuilder {
 		this.suiteDefinitions.put(description, definition);
 	}
 
+	public void xdescribe(String description, PendingInvokable definition) {
+		if (this.suiteDefinitions.containsKey(description)) {
+			throw new IllegalArgumentException(String.format("Suite with description '%s' does already exist", description));
+		}
+		this.suiteDefinitions.put(description, definition);
+	}
+
 	public void it(String description, Invokable definition) {
 		if (this.specDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
@@ -68,7 +76,7 @@ public class SuiteBuilder {
 		this.specDefinitions.put(description, Optional.of(definition));
 	}
 
-	public void xit(String description, Invokable definition) {
+	public void xit(String description) {
 		if (this.specDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
 		}
