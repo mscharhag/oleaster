@@ -15,10 +15,10 @@
 */
 package com.mscharhag.oleaster.runner.suite;
 
+import com.mscharhag.oleaster.runner.Invokable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mscharhag.oleaster.runner.Invokable;
 
 public class Suite {
 
@@ -72,10 +72,6 @@ public class Suite {
 
 	public void addSpec(Spec spec) {
 		this.specs.add(spec);
-	}
-
-	public void clearSpecs() {
-		this.specs.clear();
 	}
 
 	public Suite getParent() {
