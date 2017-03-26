@@ -75,7 +75,7 @@ public class Suite {
 	}
 
 	public void clearSpecs() {
-		this.specs.clear();;
+		this.specs.clear();
 	}
 
 	public Suite getParent() {
