@@ -148,7 +148,7 @@ public class StaticRunnerSupport {
 	 */
 	public static void it(String text) {
 		failIfNoSuiteBuilderAvailable("it");
-		suiteBuilder.xit(text);
+		suiteBuilder.xit(text, () -> {});
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class StaticRunnerSupport {
 	 */
 	public static void xit(String text, Invokable block) {
 		failIfNoSuiteBuilderAvailable("xit");
-		suiteBuilder.xit(text);
+		suiteBuilder.xit(text, block);
 	}
 
 

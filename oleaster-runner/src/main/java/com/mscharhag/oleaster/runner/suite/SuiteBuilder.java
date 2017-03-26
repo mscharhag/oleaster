@@ -90,7 +90,7 @@ public class SuiteBuilder {
 		this.focusedSpecDefinitions.put(description, Optional.of(definition));
 	}
 
-	public void xit(String description) {
+	public void xit(String description, Invokable definition) {
 		throwExceptionWhenSpecDescriptionExists(description);
 		this.specDefinitions.put(description, Optional.empty());
 	}
