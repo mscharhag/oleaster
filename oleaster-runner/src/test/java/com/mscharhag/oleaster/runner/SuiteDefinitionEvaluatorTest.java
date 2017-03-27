@@ -27,6 +27,7 @@ public class SuiteDefinitionEvaluatorTest {
 
 		beforeEach(() -> {
 			sb = new SuiteBuilder();
+			StaticRunnerSupport.setSuiteBuilder(sb);
 			sde = new SuiteDefinitionEvaluator();
 		});
 
@@ -119,15 +120,15 @@ public class SuiteDefinitionEvaluatorTest {
 			final String DESC_TWO_ONE = "two > one";
 			beforeEach(() -> {
 				suite = sde.evaluate(new SuiteDefinition(null, DESC_ROOT, () -> {
-					sb.xdescribe(DESC_ONE, () -> {
-						sb.it("hello", () -> {
+					xdescribe(DESC_ONE, () -> {
+						it("hello", () -> {
 							fail("I should be removed");
 						});
 					});
 
-					sb.xdescribe(DESC_TWO, () -> {
-						sb.describe(DESC_TWO_ONE, () -> {
-							sb.it("hello", () -> {
+					xdescribe(DESC_TWO, () -> {
+						describe(DESC_TWO_ONE, () -> {
+							it("hello", () -> {
 								fail("I should be removed");
 							});
 						});
@@ -152,7 +153,7 @@ public class SuiteDefinitionEvaluatorTest {
 			});
 		});
 
-		fdescribe("when a suite is focused", () -> {
+		describe("when a suite is focused", () -> {
 			final String DESC_ONE = "desc-one";
 			final String DESC_TWO = "desc-two";
 			final String IT_ONE = "it-one";
@@ -160,12 +161,12 @@ public class SuiteDefinitionEvaluatorTest {
 
 			beforeEach(() -> {
 				suite = sde.evaluate(new SuiteDefinition(null, "root", () -> {
-					sb.describe(DESC_ONE, () -> {
-						sb.it(IT_ONE, () -> fail("should not be found."));
+					describe(DESC_ONE, () -> {
+						it(IT_ONE, () -> fail("should not be found."));
 					});
 
-					sb.fdescribe(DESC_TWO, () -> {
-						sb.it(IT_TWO, () -> assertTrue(true));
+					fdescribe(DESC_TWO, () -> {
+						it(IT_TWO, () -> assertTrue(true));
 					});
 				}), sb);
 			});
@@ -180,7 +181,7 @@ public class SuiteDefinitionEvaluatorTest {
 			});
 		});
 
-		fdescribe("with a more complex focused and pending suite collection", () -> {
+		describe("with a more complex focused and pending suite collection", () -> {
 			final String DESC_ONE = "d1";
 			final String IT_ONE = "d1-i1";
 			final String DESC_TWO = "d2";
@@ -188,20 +189,22 @@ public class SuiteDefinitionEvaluatorTest {
 			final String DESC_THREE = "d3";
 			final String IT_THREE = "d3-i1";
 			final String IT_FOUR = "d3-i2";
+			final String IT_FIVE = "d3-i3";
 			beforeEach(() -> {
 				suite = sde.evaluate(new SuiteDefinition(null, "ROOT", () -> {
-					sb.fdescribe(DESC_ONE, () -> {
-						sb.it(IT_ONE, () -> assertTrue(true));
+					fdescribe(DESC_ONE, () -> {
+						it(IT_ONE, () -> assertTrue(true));
 					});
 
-					sb.describe(DESC_TWO, () -> {
-						sb.it("does not run", () -> fail("does not run"));
-						sb.fit(IT_TWO, () -> assertTrue(true));
+					describe(DESC_TWO, () -> {
+						it("does not run", () -> fail("does not run"));
+						fit(IT_TWO, () -> assertTrue(true));
 					});
 
-					sb.fdescribe(DESC_THREE, () -> {
-						sb.it(IT_THREE, () -> assertTrue(true));
-						sb.xit(IT_FOUR, () -> fail("does not run"));
+					fdescribe(DESC_THREE, () -> {
+						it(IT_THREE, () -> assertTrue(true));
+						xit(IT_FOUR, () -> fail("does not run"));
+						it(IT_FIVE);
 					});
 				}), sb);
 			});
@@ -220,13 +223,20 @@ public class SuiteDefinitionEvaluatorTest {
 			it("should not run it xit's in DESC_THREE", () -> {
 				final Suite d3 = suite.getSuites().get(1);
 				assertEquals(DESC_THREE, d3.getDescription());
-				assertEquals(2, d3.getSpecs().size());
+				assertEquals(3, d3.getSpecs().size());
 
 				assertEquals(IT_THREE, d3.getSpecs().get(0).getDescription());
 				assertTrue(d3.getSpecs().get(0).getBlock().isPresent());
 
 				assertEquals(IT_FOUR, d3.getSpecs().get(1).getDescription());
 				assertFalse(d3.getSpecs().get(1).getBlock().isPresent());
+			});
+
+			it("should not run it's without bodies", () -> {
+				final Suite d3 = suite.getSuites().get(1);
+
+				assertEquals(IT_FIVE, d3.getSpecs().get(2).getDescription());
+				assertFalse(d3.getSpecs().get(2).getBlock().isPresent());
 			});
 		});
 	});
