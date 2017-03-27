@@ -28,7 +28,9 @@ import com.mscharhag.oleaster.runner.PendingInvokable;
 public class SuiteBuilder {
 
 	private Map<String, Invokable> suiteDefinitions;
+	private Map<String, Invokable> focusedSuiteDefinitions;
 	private Map<String, Optional<Invokable>> specDefinitions;
+	private Map<String, Optional<Invokable>> focusedSpecDefinitions;
 	private List<Invokable> beforeEachHandlers;
 	private List<Invokable> beforeHandlers;
 	private List<Invokable> afterEachHandlers;
@@ -40,7 +42,9 @@ public class SuiteBuilder {
 
 	private void prepare() {
 		this.suiteDefinitions = new LinkedHashMap<>();
+		this.focusedSuiteDefinitions = new LinkedHashMap<>();
 		this.specDefinitions = new LinkedHashMap<>();
+		this.focusedSpecDefinitions = new LinkedHashMap<>();
 		this.beforeHandlers = new ArrayList<>();
 		this.afterHandlers = new ArrayList<>();
 		this.beforeEachHandlers = new ArrayList<>();
@@ -60,13 +64,18 @@ public class SuiteBuilder {
 		this.suiteDefinitions.put(description, definition);
 	}
 
+	public void fdescribe(String description, Invokable definition) {
+		throwExceptionWhenSuiteDescriptionExists(description);
+		this.focusedSuiteDefinitions.put(description, definition);
+	}
+
 	public void xdescribe(String description, PendingInvokable definition) {
 		throwExceptionWhenSuiteDescriptionExists(description);
 		this.suiteDefinitions.put(description, definition);
 	}
 
 	private void throwExceptionWhenSuiteDescriptionExists(final String description) {
-		if (this.suiteDefinitions.containsKey(description)) {
+		if (this.suiteDefinitions.containsKey(description) || this.focusedSuiteDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Suite with description '%s' does already exist", description));
 		}
 	}
@@ -76,13 +85,18 @@ public class SuiteBuilder {
 		this.specDefinitions.put(description, Optional.of(definition));
 	}
 
+	public void fit(String description, Invokable definition) {
+		throwExceptionWhenSpecDescriptionExists(description);
+		this.focusedSpecDefinitions.put(description, Optional.of(definition));
+	}
+
 	public void xit(String description) {
 		throwExceptionWhenSpecDescriptionExists(description);
 		this.specDefinitions.put(description, Optional.empty());
 	}
 
 	private void throwExceptionWhenSpecDescriptionExists(final String description) {
-		if (this.specDefinitions.containsKey(description)) {
+		if (this.specDefinitions.containsKey(description) || this.focusedSpecDefinitions.containsKey(description)) {
 			throw new IllegalArgumentException(String.format("Spec with description '%s' does already exist", description));
 		}
 	}
@@ -107,8 +121,16 @@ public class SuiteBuilder {
 		return suiteDefinitions;
 	}
 
+	public Map<String, Invokable> getFocusedSuiteDefinitions() {
+		return focusedSuiteDefinitions;
+	}
+
 	public Map<String, Optional<Invokable>> getSpecDefinitions() {
 		return specDefinitions;
+	}
+
+	public Map<String, Optional<Invokable>> getFocusedSpecDefinitions() {
+		return focusedSpecDefinitions;
 	}
 
 	public List<Invokable> getBeforeEachHandlers() {
