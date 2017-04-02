@@ -18,6 +18,7 @@ package com.mscharhag.oleaster.matcher;
 import com.mscharhag.oleaster.matcher.matchers.*;
 import com.mscharhag.oleaster.matcher.matchers.datetime.DateMatcher;
 
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -186,6 +187,9 @@ public class Matchers {
 		return new StringMatcher(value);
 	}
 
+	public static CollectionMatcher expect(Collection value) {
+		return new CollectionMatcher(value);
+	}
 	/**
 	 * Creates a new {@link com.mscharhag.oleaster.matcher.matchers.ObjectMatcher} initialized with
 	 * the passed {@code value}.
