@@ -108,6 +108,9 @@ expect(person).toBeNotNull();
 // check if null
 person = null;
 expect(person).toBeNull();
+
+// check if instance of
+expect("Hello World!").toBeInstanceOf(String.class);
 ```
 
 For comparing Objects [ObjectMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/ObjectMatcher.java) will be used.
