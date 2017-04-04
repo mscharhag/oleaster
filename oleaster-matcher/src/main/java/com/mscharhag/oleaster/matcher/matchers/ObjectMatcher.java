@@ -65,7 +65,7 @@ public class ObjectMatcher<T> {
 	 * @param expectedClass
 	 */
 	public void toBeInstanceOf(Class<?> expectedClass) {
-		expectTrue(value.getClass().equals(expectedClass), "Expected '%s' to be instance of '%s'", this.value, expectedClass.getName());
+		expectTrue(expectedClass.isInstance(value), "Expected '%s' to be instance of '%s'", this.value, expectedClass.getName());
 	}
 
 	protected T getValue() {

@@ -2,7 +2,7 @@ Oleaster Runner
 =====
 Oleaster Runner is a JUnit Runner that allows you to write JUnit tests like you would write Jasmine tests.
 
-````java
+```java
 import org.junit.runner.RunWith;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
@@ -172,6 +172,70 @@ describe("before/after example", () -> {
 ```
 If `before()` or `after()` is used inside nested suites, `before()`/`after()` blocks of the outer suite
 will run first.
+
+## Focusing a test (run only a selection of tests)
+
+With `fdescribe()` and `fit()` it is possible to run a single test or a single suite:
+
+```java
+describe("Test suite", () -> {
+	it("test", () -> {
+		// I will not run
+		assertTrue(false);
+	});
+	
+	fit("focused test", () -> {
+		// I will run
+		assertTrue(true);
+	});
+	
+	fdescribe("focused suite", () -> {
+		it("test", () -> {
+			// I will be run
+			assertTrue(true);
+		});
+	});
+	
+	describe("normal suite", () -> {
+		it("test", () -> {
+			// I will not run
+			assertTrue(false);
+		});
+	});
+});
+```
+
+## Skipping a test
+
+With `xdescribe()` and `xit()` it is possible to disable a single test or single suite (mark as pending):
+
+```java
+describe("Test suite", () -> {
+	it("test", () -> {
+		// I will run
+		assertTrue(true);
+	});
+	
+	it("pending test");
+
+	xit("another pending test", () -> {
+		// I will not run
+		assertTrue(false);
+	});
+	
+	describe("normal suite", () -> {
+		it("test", () -> {
+			// I will run
+			assertTrue(true);
+		});	});
+	
+	xdescribe("pending suite", () -> {
+		it("test", () -> {
+			// I will not run
+			assertTrue(false);
+		});	});
+});
+```
 
 ## Assertions
 
