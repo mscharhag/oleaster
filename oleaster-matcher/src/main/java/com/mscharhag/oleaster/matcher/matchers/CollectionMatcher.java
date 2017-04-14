@@ -12,7 +12,7 @@ import static com.mscharhag.oleaster.matcher.util.Expectations.expectTrue;
 public class CollectionMatcher extends ObjectMatcher<Collection> {
     public CollectionMatcher(final Collection value) {
         super(value);
-        Arguments.ensureNotNull(this.getValue(), "Collection cannot be null");
+        Arguments.ensureNotNull(value, "Collection cannot be null");
     }
 
     /**
@@ -40,7 +40,7 @@ public class CollectionMatcher extends ObjectMatcher<Collection> {
         expectTrue(this.getValue().size() > 0, "Expected '%s' to not be empty", this.getValue());
     }
 
-    public void toHaveLength(final int count) {
-        expectTrue(this.getValue().size() == count, "Expected '%s' to have a length of %d, instead has a length of %d", this.getValue(), count, this.getValue().size());
+    public void toHaveLength(final int length) {
+        expectTrue(this.getValue().size() == length, "Expected '%s' to have a length of %d, instead has a length of %d", this.getValue(), length, this.getValue().size());
     }
 }
