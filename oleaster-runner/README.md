@@ -2,7 +2,7 @@ Oleaster Runner
 =====
 Oleaster Runner is a JUnit Runner that allows you to write JUnit tests like you would write Jasmine tests.
 
-````java
+```java
 import org.junit.runner.RunWith;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
