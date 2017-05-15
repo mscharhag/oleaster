@@ -8,10 +8,11 @@ import com.mscharhag.oleaster.runner.suite.SuiteDefinitionEvaluator;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import static com.mscharhag.oleaster.runner.AssertUtil.assertEmptySuiteCollections;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(OleasterRunner.class)
 public class SuiteDefinitionEvaluatorTest {
@@ -26,6 +27,7 @@ public class SuiteDefinitionEvaluatorTest {
 
 		beforeEach(() -> {
 			sb = new SuiteBuilder();
+			StaticRunnerSupport.setSuiteBuilder(sb);
 			sde = new SuiteDefinitionEvaluator();
 		});
 
@@ -111,5 +113,131 @@ public class SuiteDefinitionEvaluatorTest {
 			});
 		});
 
+		describe("when a suite is pending", () -> {
+			final String DESC_ROOT = "root level";
+			final String DESC_ONE = "one";
+			final String DESC_TWO = "two";
+			final String DESC_TWO_ONE = "two > one";
+			beforeEach(() -> {
+				suite = sde.evaluate(new SuiteDefinition(null, DESC_ROOT, () -> {
+					xdescribe(DESC_ONE, () -> {
+						it("hello", () -> {
+							fail("I should be removed");
+						});
+					});
+
+					xdescribe(DESC_TWO, () -> {
+						describe(DESC_TWO_ONE, () -> {
+							it("hello", () -> {
+								fail("I should be removed");
+							});
+						});
+					});
+				}), sb);
+			});
+
+			it("should remove the it block of the it in DESC_ONE", () -> {
+				final Suite descOneSuite = suite.getSuites().get(0);
+				assertEquals(DESC_ONE, descOneSuite.getDescription());
+				assertEquals(Optional.empty(), descOneSuite.getSpecs().get(0).getBlock());
+			});
+
+			it("should remove the it block of the it which is deeper nested in DESC_TWO", () -> {
+				final Suite descTwoSuite = suite.getSuites().get(1);
+				assertEquals(DESC_TWO, descTwoSuite.getDescription());
+
+				final Suite deskTwoOneSuite = descTwoSuite.getSuites().get(0);
+				assertEquals(DESC_TWO_ONE, deskTwoOneSuite.getDescription());
+
+				assertEquals(Optional.empty(), deskTwoOneSuite.getSpecs().get(0).getBlock());
+			});
+		});
+
+		describe("when a suite is focused", () -> {
+			final String DESC_ONE = "desc-one";
+			final String DESC_TWO = "desc-two";
+			final String IT_ONE = "it-one";
+			final String IT_TWO = "it-two";
+
+			beforeEach(() -> {
+				suite = sde.evaluate(new SuiteDefinition(null, "root", () -> {
+					describe(DESC_ONE, () -> {
+						it(IT_ONE, () -> fail("should not be found."));
+					});
+
+					fdescribe(DESC_TWO, () -> {
+						it(IT_TWO, () -> assertTrue(true));
+					});
+				}), sb);
+			});
+
+			it("should not find DESC_ONE nor IT_ONE", () -> {
+				assertEquals(1, suite.getSuites().size());
+				assertFalse(DESC_ONE.equals(suite.getSuites().get(0).getDescription()));
+			});
+
+			it("should find only DESC_TWO",() -> {
+				assertTrue(DESC_TWO.equals(suite.getSuites().get(0).getDescription()));
+			});
+		});
+
+		describe("with a more complex focused and pending suite collection", () -> {
+			final String DESC_ONE = "d1";
+			final String IT_ONE = "d1-i1";
+			final String DESC_TWO = "d2";
+			final String IT_TWO = "d2-i1";
+			final String DESC_THREE = "d3";
+			final String IT_THREE = "d3-i1";
+			final String IT_FOUR = "d3-i2";
+			final String IT_FIVE = "d3-i3";
+			beforeEach(() -> {
+				suite = sde.evaluate(new SuiteDefinition(null, "ROOT", () -> {
+					fdescribe(DESC_ONE, () -> {
+						it(IT_ONE, () -> assertTrue(true));
+					});
+
+					describe(DESC_TWO, () -> {
+						it("does not run", () -> fail("does not run"));
+						fit(IT_TWO, () -> assertTrue(true));
+					});
+
+					fdescribe(DESC_THREE, () -> {
+						it(IT_THREE, () -> assertTrue(true));
+						xit(IT_FOUR, () -> fail("does not run"));
+						it(IT_FIVE);
+					});
+				}), sb);
+			});
+
+			it("should run it's in the first focused describe", () -> {
+				assertEquals(DESC_ONE, suite.getSuites().get(0).getDescription());
+				assertEquals(1, suite.getSuites().get(0).getSpecs().size());
+				assertEquals(IT_ONE, suite.getSuites().get(0).getSpecs().get(0).getDescription());
+			});
+
+			it("should not run DESC_TWO", () -> {
+				assertEquals(2, suite.getSuites().size());
+				suite.getSuites().forEach(s -> assertNotEquals(DESC_TWO, s.getDescription()));
+			});
+
+			it("should not run it xit's in DESC_THREE", () -> {
+				final Suite d3 = suite.getSuites().get(1);
+				assertEquals(DESC_THREE, d3.getDescription());
+				assertEquals(3, d3.getSpecs().size());
+
+				assertEquals(IT_THREE, d3.getSpecs().get(0).getDescription());
+				assertTrue(d3.getSpecs().get(0).getBlock().isPresent());
+
+				assertEquals(IT_FOUR, d3.getSpecs().get(1).getDescription());
+				assertFalse(d3.getSpecs().get(1).getBlock().isPresent());
+			});
+
+			it("should not run it's without bodies", () -> {
+				final Suite d3 = suite.getSuites().get(1);
+
+				assertEquals(IT_FIVE, d3.getSpecs().get(2).getDescription());
+				assertFalse(d3.getSpecs().get(2).getBlock().isPresent());
+			});
+		});
 	});
 }}

@@ -75,9 +75,14 @@ public class OleasterRunner extends ParentRunner<Spec> {
 			runBeforeCallbacks(spec);
 		}
 
-		runBeforeEachCallbacks(spec);
-		runLeaf(spec, describeChild(spec), notifier);
-		runAfterEachCallbacks(spec);
+		if (spec.getBlock().isPresent()) {
+			runBeforeEachCallbacks(spec);
+			runLeaf(spec, describeChild(spec), notifier);
+			runAfterEachCallbacks(spec);
+		} else {
+			notifier.fireTestIgnored(describeChild(spec));
+		}
+
 
 		if (suiteHasNoSpecs || isLastSpec){
 			runAfterCallbacks(spec);
