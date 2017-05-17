@@ -20,6 +20,7 @@ import com.mscharhag.oleaster.matcher.matchers.datetime.DateMatcher;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * {@code Matchers} provides a set of static {@code expect()} methods that can (and should) be used to
@@ -187,8 +188,36 @@ public class Matchers {
 		return new StringMatcher(value);
 	}
 
+	/**
+	 * Creates a new {@link com.mscharhag.oleaster.matcher.matchers.CollectionMatcher} initialized with
+	 * the passed {@code value}.
+	 * <p>The returned matcher can be used to check {@code Collection} values.
+	 * <pre>
+	 *     expect(list).toContain("foo");
+	 *     expect(list).toBeEmpty();
+	 * </pre>
+	 * @see com.mscharhag.oleaster.matcher.matchers.CollectionMatcher
+	 * @param value the value that should be checked
+	 * @return a new {@code CollectionMatcher} initialized with {@code value}
+	 */
 	public static CollectionMatcher expect(Collection value) {
 		return new CollectionMatcher(value);
+	}
+
+	/**
+	 * Creates a new {@link com.mscharhag.oleaster.matcher.matchers.MapMatcher} initialized with
+	 * the passed {@code value}.
+	 * <p>The returned matcher can be used to check {@code Map} values.
+	 * <pre>
+	 *     expect(map).toContainValue("foo");
+	 *     expect(map).toHaveLength(3);
+	 * </pre>
+	 * @see com.mscharhag.oleaster.matcher.matchers.MapMatcher
+	 * @param value the value that should be checked
+	 * @return a new {@code MapMatcher} initialized with {@code value}
+	 */
+	public static MapMatcher expect(Map value) {
+		return new MapMatcher(value);
 	}
 	/**
 	 * Creates a new {@link com.mscharhag.oleaster.matcher.matchers.ObjectMatcher} initialized with
