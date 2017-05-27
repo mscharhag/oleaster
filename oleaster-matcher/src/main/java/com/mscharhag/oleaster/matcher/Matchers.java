@@ -210,15 +210,16 @@ public class Matchers {
 	 * <p>The returned matcher can be used to check {@code Map} values.
 	 * <pre>
 	 *     expect(map).toContainValue("foo");
-	 *     expect(map).toHaveLength(3);
+	 *     expect(map).toHaveSize(3);
 	 * </pre>
 	 * @see com.mscharhag.oleaster.matcher.matchers.MapMatcher
 	 * @param value the value that should be checked
 	 * @return a new {@code MapMatcher} initialized with {@code value}
 	 */
-	public static MapMatcher expect(Map value) {
-		return new MapMatcher(value);
+	public static <K, V> MapMatcher<K, V> expect(Map<K, V> value) {
+		return new MapMatcher<>(value);
 	}
+
 	/**
 	 * Creates a new {@link com.mscharhag.oleaster.matcher.matchers.ObjectMatcher} initialized with
 	 * the passed {@code value}.

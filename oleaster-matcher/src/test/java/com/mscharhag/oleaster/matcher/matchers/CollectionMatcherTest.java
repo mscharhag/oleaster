@@ -27,6 +27,11 @@ public class CollectionMatcherTest {{
                         "Expected '[one, two]' to contain 'four'");
             });
 
+            it("fails if the stored collection is null", () -> {
+                expectAssertionError(() -> new CollectionMatcher(null).toContain("one"),
+                        "Expected null to contain 'one'");
+            });
+
             it("is ok if the stored collection contains the expected value", () -> {
                 new CollectionMatcher(list).toContain("one");
                 new CollectionMatcher(set).toContain("two");
@@ -34,11 +39,16 @@ public class CollectionMatcherTest {{
         });
 
         describe("when toNotContain() is called", () -> {
-            it("fails if hte stored collection does contain the expected value", () -> {
+            it("fails if the stored collection does contain the expected value", () -> {
                 expectAssertionError(() -> new CollectionMatcher(list).toNotContain("one"),
                         "Expected '[one, two]' to not contain 'one'");
                 expectAssertionError(() -> new CollectionMatcher(set).toNotContain("one"),
                         "Expected '[one, two]' to not contain 'one'");
+            });
+
+            it("fails if the stored collection is null", () -> {
+                expectAssertionError(() -> new CollectionMatcher(null).toNotContain("one"),
+                        "Expected null to not contain 'one'");
             });
 
             it("is ok if the stored collection not contains the expected value", () -> {
@@ -55,6 +65,11 @@ public class CollectionMatcherTest {{
                         "Expected '[one, two]' to be empty");
             });
 
+            it("fails if the stored collection is null", () -> {
+                expectAssertionError(() -> new CollectionMatcher(null).toBeEmpty(),
+                        "Expected null to be empty");
+            });
+
             it("is ok if the stored collection is empty", () -> {
                 new CollectionMatcher(new LinkedList()).toBeEmpty();
                 new CollectionMatcher(new HashSet()).toBeEmpty();
@@ -69,23 +84,32 @@ public class CollectionMatcherTest {{
                         "Expected '[]' to not be empty");
             });
 
+            it("fails if the stored collection is null", () -> {
+                expectAssertionError(() -> new CollectionMatcher(null).toNotBeEmpty(),
+                        "Expected null to not be empty");
+            });
+
             it("is ok if the stored collection is not empty", () -> {
                 new CollectionMatcher(list).toNotBeEmpty();
                 new CollectionMatcher(set).toNotBeEmpty();
             });
         });
 
-        describe("when toHaveLength() is called", () -> {
-            it("fails if the stored collection does not have the provided length", () -> {
-                expectAssertionError(() -> new CollectionMatcher(list).toHaveLength(1),
-                        "Expected '[one, two]' to have a length of 1, instead has a length of 2");
-                expectAssertionError(() -> new CollectionMatcher(set).toHaveLength(-1),
-                        "Expected '[one, two]' to have a length of -1, instead has a length of 2");
+        describe("when toHaveSize() is called", () -> {
+            it("fails if the stored collection does not have the provided size", () -> {
+                expectAssertionError(() -> new CollectionMatcher(list).toHaveSize(1),
+                        "Expected '[one, two]' to have a size of 1, instead has a size of 2");
+                expectAssertionError(() -> new CollectionMatcher(set).toHaveSize(-1),
+                        "Expected '[one, two]' to have a size of -1, instead has a size of 2");
             });
 
-            it("is ok if hte stored collection has the provided length", () -> {
-               new CollectionMatcher(list).toHaveLength(2);
-               new CollectionMatcher(set).toHaveLength(2);
+            it("fails if the stored collection is null", () -> {
+                expectAssertionError(() -> new CollectionMatcher(null).toHaveSize(1));
+            });
+
+            it("is ok if hte stored collection has the provided size", () -> {
+               new CollectionMatcher(list).toHaveSize(2);
+               new CollectionMatcher(set).toHaveSize(2);
             });
         });
     });

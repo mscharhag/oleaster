@@ -136,6 +136,42 @@ expect("foobar").toMatch("fo+\\w*");
 
 For comparing Strings [StringMatcher](https://github.com/mscharhag/oleaster/blob/master/oleaster-matcher/src/main/java/com/mscharhag/oleaster/matcher/matchers/StringMatcher.java) will be used.
 
+## Collections
+
+```
+// check if a collection contains a specific item
+expect(myList).toContain("my item");
+expect(mySet).toNotContain(42);
+
+// check the size of a collection
+expect(myList).toBeEmpty();
+expect(mySet).toHaveSize(15);
+```
+
+### Maps
+
+```
+// check if a map contains a specific key
+expect(myMap).toContainKey("key");
+
+// check if a map contains a specific value
+expect(myMap).toContainValue("value");
+```
+
+## Date and Time
+
+```
+// check if a date is before or after another date
+expect(date).toBeAfter(otherDate);
+expect(date).toBeBefore(otherDate);
+
+// check if a date is between two other dates
+expect(date).toBeBetween(firstDate, otherDate);
+
+// check if a date is close to another date
+expect(date).toBeCloseTo(otherDate, deltaInMillis );
+```
+
 ## Exceptions
 To test exceptions you just have to wrap the code that throws the expected exception into a lambda expression and pass
 it to `expect()`. The lambda expression will be executed and thrown exceptions will be caught.
