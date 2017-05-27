@@ -4,6 +4,10 @@ import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.*;
 import static com.mscharhag.oleaster.matcher.Matchers.*;
@@ -46,5 +50,19 @@ public class MatchersTest {{
 			expect(date).toBeCloseTo(dateWithinDelta, delta);
 		});
 
+		it("CollectionMatcher", () -> {
+			final List<String> list = new LinkedList<>();
+			list.add("one");
+			list.add("two");
+			expect(list).toContain("one");
+		});
+
+		it("MapMatcher", () -> {
+			final Map<String, Boolean> map = new HashMap<>();
+			map.put("one", false);
+			map.put("two", true);
+			expect(map).toContainKey("one");
+			expect(map).toContainValue(true);
+		});
 	});
 }}
