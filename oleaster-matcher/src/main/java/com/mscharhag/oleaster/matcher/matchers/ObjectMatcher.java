@@ -61,8 +61,8 @@ public class ObjectMatcher<T> {
 
 	/**
 	 * Checks if the stored value is an instance of the {@code expectedClass}
-	 *  <p>This method throws an {@code AssertionError} if the stored value is not of instance of {@code expectedClass}.
-	 * @param expectedClass
+	 * <p>This method throws an {@code AssertionError} if the stored value is not of instance of {@code expectedClass}.
+	 * @param expectedClass The expected class
 	 */
 	public void toBeInstanceOf(Class<?> expectedClass) {
 		expectTrue(expectedClass.isInstance(value), "Expected '%s' to be instance of '%s'", this.value, expectedClass.getName());

@@ -23,7 +23,6 @@ public class CollectionMatcher extends ObjectMatcher<Collection> {
      *     <li>the stored {@code Collection} does not contain the passed {@code item}</li>
      *     <li>the given {@code Collection} is {@code null}</li>
      * </ul>
-     * </p>
      * @param item the {@code Object} which the {@code Collection} should contain.
      */
     public void toContain(final Object item) {
@@ -38,7 +37,6 @@ public class CollectionMatcher extends ObjectMatcher<Collection> {
      *     <li>the stored {@code Collection} does contain the passed {@code item}</li>
      *     <li>the given {@code Collection} is {@code null}</li>
      * </ul>
-     * </p>
      * @param item the {@code Object} which the {@code Collection} should not contain.
      */
     public void toNotContain(final Object item) {
@@ -79,8 +77,6 @@ public class CollectionMatcher extends ObjectMatcher<Collection> {
      *     <li>the stored {@code Collection} has a different size than the passed value</li>
      *     <li>the stored {@code Collection} is {@code null}</li>
      * </ul>
-     *
-     * </p>
      * @param size The expected size of the collection
      */
     public void toHaveSize(final int size) {
