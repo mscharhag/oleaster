@@ -32,7 +32,7 @@ If you are using Maven you just have to add the following dependency:
 <dependency>
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-matcher</artifactId>
-	<version>0.1.2</version>
+	<version>0.2.0</version>
 </dependency>
 ```
 
