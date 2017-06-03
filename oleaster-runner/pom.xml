@@ -7,13 +7,13 @@
 	<parent>
 		<groupId>com.mscharhag.oleaster</groupId>
 		<artifactId>oleaster</artifactId>
-		<version>0.1.3-SNAPSHOT</version>
+		<version>0.2.0</version>
 	</parent>
 
 	<groupId>com.mscharhag.oleaster</groupId>
 	<artifactId>oleaster-runner</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1.3-SNAPSHOT</version>
+	<version>0.2.0</version>
 	<name>Oleaster Runner</name>
 	<description>A JUnit runner to write Jasmine like JUnit tests</description>
 
