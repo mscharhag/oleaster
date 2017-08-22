@@ -44,10 +44,10 @@ Travis CI builds can be found [here](https://travis-ci.org/mscharhag/oleaster)
 
 	<!-- Oleaster Matchers -->
 	<dependency>
-    	<groupId>com.mscharhag.oleaster</groupId>
-    	<artifactId>oleaster-matcher</artifactId>
-    	<version>0.2.0</version>
-    </dependency>
+		<groupId>com.mscharhag.oleaster</groupId>
+		<artifactId>oleaster-matcher</artifactId>
+		<version>0.2.0</version>
+    	</dependency>
     
 	<!-- Oleaster JUnit runner -->
 	<dependency>
